@@ -1,0 +1,46 @@
+<p class="import-assets-css test-scss">test works!</p>
+<iframe style="position: absolute;width:0;height:0;border:0;"></iframe>
+<div class="container">
+  <div class="row">
+    <div class="col-8 bd-example">
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickSignIn()">Sign In</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickRefresh()">Refresh</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickAuthCheck()">Auth Check</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickSignOut()">Sign Out</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8 bd-example">
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickQuery()">Query</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickInsert()">Insert</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickUpdate()">Update</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickDelete()">Delete</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8 bd-example">
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickGetDownload()">Get Download</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickPostDownload()">Post Download</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickAuthCheck()">Auth Check</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickSignOut()">Sign Out</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label>NumberFormatPipe:{{ '123456789' | numberFormat }}</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <p>Menu</p>
+      <p *ngFor="let item of items">
+        <a href="javascript:void(0)" (click)="goPage(item)">{{item}}</a>
+      </p>
+    </div>
+    <div class="col-9">
+      <label>Content</label>
+      <br>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
