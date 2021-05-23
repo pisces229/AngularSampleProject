@@ -3,26 +3,35 @@
 <div class="container">
   <div class="row">
     <div class="col-8 bd-example">
-      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickSignIn()">Sign In</button>
-      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickRefresh()">Refresh</button>
-      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickAuthCheck()">Auth Check</button>
-      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickSignOut()">Sign Out</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickGetValueByValue()">Get Value By Value</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickPostValueByValue()">Post Value By Value</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickGetValueByModel()">Get Value By Model</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickPostValueByModel()">Get Value By Model</button>
     </div>
   </div>
   <div class="row">
     <div class="col-8 bd-example">
-      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickQuery()">Query</button>
-      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickInsert()">Insert</button>
-      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickUpdate()">Update</button>
-      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickDelete()">Delete</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickSignIn()">Sign In</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickRefresh()">Refresh</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickValidateAuth()">Validate Auth</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickSignOut()">Sign Out</button>
     </div>
   </div>
   <div class="row">
     <div class="col-8 bd-example">
-      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickGetDownload()">Get Download</button>
-      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickPostDownload()">Post Download</button>
-      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickAuthCheck()">Auth Check</button>
-      <button type="button" class="btn btn-outline-primary btn-sm" (click)="clickSignOut()">Sign Out</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickQuery()">Query</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickInsert()">Insert</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickUpdate()">Update</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickDelete()">Delete</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8 bd-example">
+      <input type="file" multiple (change)="onChangeFile($event)" />
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickUpload()">Upload</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickUploads()">Uploads</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickGetDownload()">Get Download</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="onClickPostDownload()">Post Download</button>
     </div>
   </div>
   <div class="row">

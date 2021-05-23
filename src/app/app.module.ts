@@ -29,7 +29,7 @@ import { LayoutComponent } from './shared/component/layout/layout.component';
     AppRoutingModule,
     HttpClientModule,
     BlockUIModule.forRoot({
-      message: 'Default Message'
+      message: 'Loading...'
     })
   ],
   providers: [

@@ -1,7 +1,7 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { catchError, filter, take, switchMap } from 'rxjs/operators';
+import { catchError, filter, take, switchMap, delay, finalize } from 'rxjs/operators';
 import { AuthTokenService } from '../service/auth-token.service';
 import { CatchErrorService } from '../service/catch-error.service';
 import { AuthTokenStoreService } from '../store/auth-token-store.service';
@@ -21,10 +21,11 @@ export class DefaultInterceptor implements HttpInterceptor {
     if (this.authTokenStoreService.getAuthToken()) {
       request = this.addToken(request, this.authTokenStoreService.getAuthToken());
     }
-    return next.handle(request).pipe(catchError(error => {
+    return next.handle(request)
+    .pipe(catchError(error => {
       if (error instanceof HttpErrorResponse && error.status === 401) {
-        //return this.handle401Error(request, next);
-        return this.handle401ErrorOnly(request, next);
+        return this.handle401Error(request, next);
+        // return this.handle401ErrorOnly(request, next);
       } else {
         this.catchErrorService.push(error);
         return throwError(error);
@@ -61,7 +62,8 @@ export class DefaultInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request : HttpRequest<any>, next : HttpHandler): Observable<HttpEvent<any>> {
-    return this.authTokenService.refresh().pipe(
+    return this.authTokenService.refresh()
+    .pipe(
       switchMap((token: string) => {
         return next.handle(this.addToken(request, token));
       }));

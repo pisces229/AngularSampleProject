@@ -1,4 +1,6 @@
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { saveAs } from 'file-saver';
 
 @Injectable({
   providedIn: 'root'
@@ -7,31 +9,36 @@ export class DownloadService {
 
   constructor() { }
 
-  create(hexString : string, filename : string) : void {
-    if (hexString === "") {
-        return;
-    }
-    let buffer = [];
-    for (var i = 0; i < hexString.length; i += 2) {
-        buffer.push(parseInt(hexString.substring(i, i + 2), 16))
-    }
-    let byteArray = new Uint8Array(buffer);
-    let a = window.document.createElement('a');
-    try
-    {
-      a.href = window.URL.createObjectURL(new Blob([byteArray], { type: 'application/octet-stream' }));
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-    }
-    finally
-    {
-      try
+  create(response : HttpResponse<Blob>) : void {
+    // console.log(response);
+    // console.log(response.headers.keys());
+    let contentDisposition = response.headers.get('content-disposition');
+    let contentDispositionValues = contentDisposition?.split(';');
+    let filename = 'download';
+    contentDispositionValues?.forEach(f =>
       {
-        document.body.removeChild(a);
-      }
-      catch
-      { }
+        if (f.indexOf('filename') > -1) {
+          let texts = f.split('=');
+          if (texts.length > 1) {
+            filename = texts[1];
+          }
+        }
+      });
+    // const a = window.document.createElement('a');
+    // a.href = window.URL.createObjectURL(res.body);
+    // a.download = filename;
+    // document.body.appendChild(a);
+    // a.click();
+    // document.body.removeChild(a);
+    saveAs((response.body as Blob), filename);
+  }
+
+  error(error : any) : void {
+    if (error instanceof HttpErrorResponse) {
+      error.error.text()
+      .then((value : any) => {
+        console.log(value);
+      });
     }
   }
 

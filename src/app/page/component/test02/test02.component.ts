@@ -21,20 +21,20 @@ export class Test02Component implements OnInit {
   test02FormModel = new Test02FormModel();
 
   constructor(private router : Router,
-    private service : Test02Service,
-    private storeService : Test02StoreService) {
-      if (storeService.getTest02Model()) {
-        this.test02Model = this.storeService.getTest02Model();
+    private test02Service : Test02Service,
+    private test02StoreService : Test02StoreService) {
+      if (test02StoreService.getTest02Model()) {
+        this.test02Model = this.test02StoreService.getTest02Model();
       }
-      if (storeService.getTest02FormModel()) {
-        this.test02FormModel = this.storeService.getTest02FormModel();
+      if (test02StoreService.getTest02FormModel()) {
+        this.test02FormModel = this.test02StoreService.getTest02FormModel();
       }
   }
 
   ngOnInit() : void {
     // Start blocking
-    this.blockUI.start('Loading...');
-
+    this.blockUI.start();
+    // do something
     setTimeout(() => {
       // Stop blocking
       this.blockUI.stop();
@@ -50,8 +50,9 @@ export class Test02Component implements OnInit {
   }
 
   go() : void {
-    this.storeService.setTest02Model(this.test02Model);
-    this.storeService.setTest02FormModel(this.test02FormModel);
+    this.test02StoreService.setTest02Model(this.test02Model);
+    this.test02FormModel.Age = null;
+    this.test02StoreService.setTest02FormModel(this.test02FormModel);
     this.router.navigate(['test01']);
   }
 

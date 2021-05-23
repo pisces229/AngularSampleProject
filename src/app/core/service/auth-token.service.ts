@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of, Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, finalize } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { AuthTokenStoreService } from '../store/auth-token-store.service';
@@ -30,6 +30,7 @@ export class AuthTokenService {
         .pipe(
           tap((value : string) => this.authTokenStoreService.setAuthToken(value)));
     } else {
+      console.log('refresh fail');
       return throwError('refresh fail');
     }
   }
