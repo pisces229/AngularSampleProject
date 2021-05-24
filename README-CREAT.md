@@ -6,18 +6,16 @@
 
 * Angular HttpClient (ajax lib)
 
-    `npm install @angular/http --save`
+    `npm install --save @angular/http`
 * Bootstrap (scss)
 
-    `npm install bootstrap --save`
+    `npm install --save bootstrap`
 * Ng Block UI (Block ui)
 
-    `npm install ng-block-ui --save`
+    `npm install --save ng-block-ui`
 * File Saver (ajax download)
 
-    `npm install file-saver --save`
-
-    `npm install @types/file-saver --save`
+    `npm install --save file-saver @types/file-saver`
 
 ## [Create Command](https://angular.io/cli/generate#guard-command)
 
