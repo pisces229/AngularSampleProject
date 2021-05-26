@@ -18,6 +18,9 @@
 > > > 核心服務資料結構
 > > > * [name]
 > > > > * [name]-model.ts
+> > * util
+> > > 共用方法
+> > > * [name]-util.service.ts
 > * shared
 > > 共用功能
 > > * component

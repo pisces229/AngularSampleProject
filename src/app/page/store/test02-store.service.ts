@@ -8,15 +8,15 @@ import { Test02Model } from '../model/test02/test02-model';
 })
 export class Test02StoreService {
 
-  test02Model! : Test02Model;
-  test02FormModel! : Test02FormModel;
+  test02Model!: Test02Model;
+  test02FormModel!: Test02FormModel;
 
   constructor() { }
 
-  setTest02Model = (value : Test02Model) : void => { this.test02Model = value; }
-  getTest02Model = () : Test02Model => this.test02Model;
+  setTest02Model = (value: Test02Model): void => { this.test02Model = value; }
+  getTest02Model = (): Test02Model => this.test02Model;
 
-  setTest02FormModel = (value : Test02FormModel) : void => { this.test02FormModel = value; }
-  getTest02FormModel = () : Test02FormModel => this.test02FormModel;
+  setTest02FormModel = (value: Test02FormModel): void => { this.test02FormModel = value; }
+  getTest02FormModel = (): Test02FormModel => this.test02FormModel;
 
 }

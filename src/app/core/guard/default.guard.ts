@@ -2,16 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanDeactivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { catchError, map, mapTo, tap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { catchError, map, tap } from 'rxjs/operators';
+import { EndpointUtilService } from '../util/endpoint-util.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DefaultGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
 
-  constructor(private router : Router,
-    private httpClient : HttpClient) { }
+  constructor(private router: Router,
+    private httpClient: HttpClient,
+    private endpointUtilService: EndpointUtilService) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -31,12 +32,12 @@ export class DefaultGuard implements CanActivate, CanActivateChild, CanDeactivat
       // console.log(state);
       // console.log(childRoute.routeConfig?.path);
       // console.log('DefaultGuard canActivateChild');
-      return this.httpClient.post(`${environment.APIEndpoint}/Test/ValidateRoute`, { Path : childRoute.routeConfig?.path })
+      return this.httpClient.post(this.endpointUtilService.defaultUrl('Test/ValidateRoute'), { Path: childRoute.routeConfig?.path })
       .pipe(
         tap(value => {
           console.log(value);
         }),
-        map((value : any) => {
+        map((value: any) => {
           if (value.Success) {
             return true;
           } else {

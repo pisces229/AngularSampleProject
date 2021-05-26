@@ -14,14 +14,14 @@ import { Test01StoreService } from '../../store/test01-store.service';
 })
 export class Test01Component implements OnInit {
 
-  @BlockUI() blockUI! : NgBlockUI;
+  @BlockUI() blockUI!: NgBlockUI;
 
   test01Model = new Test01Model();
   test01FormModel = new Test01FormModel();
 
-  constructor(private router : Router,
-    private test01Service : Test01Service,
-    private test01StoreService : Test01StoreService) {
+  constructor(private router: Router,
+    private test01Service: Test01Service,
+    private test01StoreService: Test01StoreService) {
       if (this.test01StoreService.getTest01Model()) {
         this.test01Model = this.test01StoreService.getTest01Model();
       }
@@ -30,7 +30,7 @@ export class Test01Component implements OnInit {
       }
   }
 
-  ngOnInit() : void {
+  ngOnInit(): void {
     // Start blocking
     this.blockUI.start();
     // do something
@@ -40,15 +40,15 @@ export class Test01Component implements OnInit {
     }, 500);
   }
 
-  plus() : void{
+  plus(): void{
     this.test01Model.Count++;
   }
 
-  minus() : void{
+  minus(): void{
     this.test01Model.Count--;
   }
 
-  go() : void {
+  go(): void {
     this.test01StoreService.setTest01Model(this.test01Model);
     this.test01FormModel.Age = null;
     this.test01StoreService.setTest01FormModel(this.test01FormModel);

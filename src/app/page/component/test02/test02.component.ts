@@ -15,14 +15,14 @@ import { Test02FormModel } from '../../model/test02/test02-form-model';
 })
 export class Test02Component implements OnInit {
 
-  @BlockUI() blockUI! : NgBlockUI;
+  @BlockUI() blockUI!: NgBlockUI;
 
   test02Model = new Test02Model();
   test02FormModel = new Test02FormModel();
 
-  constructor(private router : Router,
-    private test02Service : Test02Service,
-    private test02StoreService : Test02StoreService) {
+  constructor(private router: Router,
+    private test02Service: Test02Service,
+    private test02StoreService: Test02StoreService) {
       if (test02StoreService.getTest02Model()) {
         this.test02Model = this.test02StoreService.getTest02Model();
       }
@@ -31,7 +31,7 @@ export class Test02Component implements OnInit {
       }
   }
 
-  ngOnInit() : void {
+  ngOnInit(): void {
     // Start blocking
     this.blockUI.start();
     // do something
@@ -41,15 +41,15 @@ export class Test02Component implements OnInit {
     }, 500);
   }
 
-  plus() : void{
+  plus(): void{
     this.test02Model.Count++;
   }
 
-  minus() : void{
+  minus(): void{
     this.test02Model.Count--;
   }
 
-  go() : void {
+  go(): void {
     this.test02StoreService.setTest02Model(this.test02Model);
     this.test02FormModel.Age = null;
     this.test02StoreService.setTest02FormModel(this.test02FormModel);

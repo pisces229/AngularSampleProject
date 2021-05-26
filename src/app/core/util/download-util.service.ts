@@ -5,11 +5,11 @@ import { saveAs } from 'file-saver';
 @Injectable({
   providedIn: 'root'
 })
-export class DownloadService {
+export class DownloadUtilService {
 
   constructor() { }
 
-  create(response : HttpResponse<Blob>) : void {
+  create(response: HttpResponse<Blob>): void {
     // console.log(response);
     // console.log(response.headers.keys());
     let contentDisposition = response.headers.get('content-disposition');
@@ -33,10 +33,10 @@ export class DownloadService {
     saveAs((response.body as Blob), filename);
   }
 
-  error(error : any) : void {
+  error(error: any): void {
     if (error instanceof HttpErrorResponse) {
       error.error.text()
-      .then((value : any) => {
+      .then((value: any) => {
         console.log(value);
       });
     }

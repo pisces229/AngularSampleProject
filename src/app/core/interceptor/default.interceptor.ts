@@ -12,12 +12,12 @@ export class DefaultInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private authTokenService : AuthTokenService,
-    private authTokenStoreService : AuthTokenStoreService,
-    private catchErrorService : CatchErrorService) { }
+  constructor(private authTokenService: AuthTokenService,
+    private authTokenStoreService: AuthTokenStoreService,
+    private catchErrorService: CatchErrorService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // console.log(request);
+    console.log('DefaultInterceptor');
     if (this.authTokenStoreService.getAuthToken()) {
       request = this.addToken(request, this.authTokenStoreService.getAuthToken());
     }
@@ -41,7 +41,7 @@ export class DefaultInterceptor implements HttpInterceptor {
     });
   }
 
-  private handle401ErrorOnly(request : HttpRequest<any>, next : HttpHandler): Observable<HttpEvent<any>> {
+  private handle401ErrorOnly(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
@@ -61,7 +61,7 @@ export class DefaultInterceptor implements HttpInterceptor {
     }
   }
 
-  private handle401Error(request : HttpRequest<any>, next : HttpHandler): Observable<HttpEvent<any>> {
+  private handle401Error(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return this.authTokenService.refresh()
     .pipe(
       switchMap((token: string) => {

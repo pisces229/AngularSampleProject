@@ -1,3 +1,3 @@
 export class Test01Model {
-  Count : number = 0;
+  Count: number = 0;
 }

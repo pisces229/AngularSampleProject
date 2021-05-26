@@ -7,7 +7,7 @@ export class CatchErrorService {
 
   constructor() { }
 
-  push(value : any) {
+  push(value: any) {
     console.log(value);
   }
 }

@@ -9,11 +9,11 @@ export class AuthTokenStoreService {
 
   constructor() { }
 
-  getAuthToken = () : string | null => localStorage.getItem(this.AUTH_TOKEN);
+  getAuthToken = (): string | null => localStorage.getItem(this.AUTH_TOKEN);
 
-  setAuthToken = (value : string) : void => { localStorage.setItem(this.AUTH_TOKEN, value); }
+  setAuthToken = (value: string): void => { localStorage.setItem(this.AUTH_TOKEN, value); }
 
-  clear = () : void => {
+  clear = (): void => {
     localStorage.removeItem(this.AUTH_TOKEN);
   }
 

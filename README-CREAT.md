@@ -30,6 +30,8 @@
 > `ng generate service core/store/[name]-store`
 > 
 > `ng generate class core/model/[name]/[name]-model`
+>
+> `ng generate service shared/util/[name]-util`
 
 > Shared 
 > 

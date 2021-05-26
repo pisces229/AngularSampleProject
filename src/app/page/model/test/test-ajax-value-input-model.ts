@@ -1,5 +1,5 @@
 export class TestAjaxValueInputModel {
-  Name! : string;
-  Count! : number;
-  Date! : Date;
+  Name!: string;
+  Count!: number;
+  Date!: Date;
 }

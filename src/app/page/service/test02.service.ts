@@ -6,9 +6,9 @@ import { Test02StoreService } from '../store/test02-store.service';
 })
 export class Test02Service {
 
-  constructor(storeService : Test02StoreService) { }
+  constructor(storeService: Test02StoreService) { }
 
-  public run(text : string) : void {
+  public run(text: string): void {
     console.log(`Test02Service ${text} Run`);
   }
 
