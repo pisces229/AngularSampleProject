@@ -15,12 +15,12 @@ export class AppComponent {
     private httpBackend: HttpBackend,
     private endpointUtilService: EndpointUtilService) {
     {
-      httpClient.get(endpointUtilService.defaultUrl('assets/test.json'), {}).subscribe(value => console.log(value));
+      httpClient.get(endpointUtilService.defaultUrl('assets/test.json')).subscribe(value => console.log(value));
     }
     {
       // create new HttpClient with Interceptor
       let httpClient = new HttpClient(new HttpInterceptorHandler(httpBackend, new NothingInterceptor()));
-      httpClient.get(endpointUtilService.defaultUrl('assets/test.json'), {}).subscribe(value => console.log(value));
+      httpClient.get(endpointUtilService.defaultUrl('assets/test.json')).subscribe(value => console.log(value));
     }
   }
 }
