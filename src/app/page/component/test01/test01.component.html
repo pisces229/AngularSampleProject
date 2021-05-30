@@ -7,7 +7,7 @@
   </div>
   <div class="row form-group">
     <div class="col">
-      <input type="text" [(ngModel)]="test01FormModel.Name" />
+      <input type="text" [(ngModel)]="test01FormModel.Name" (change)="onChangeFormName($event)" />
     </div>
     <div class="col">
       <input type="text" [(ngModel)]="test01FormModel.Age" />

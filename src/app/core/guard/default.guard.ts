@@ -32,23 +32,24 @@ export class DefaultGuard implements CanActivate, CanActivateChild, CanDeactivat
       // console.log(state);
       // console.log(childRoute.routeConfig?.path);
       // console.log('DefaultGuard canActivateChild');
-      return this.httpClient.post(this.endpointUtilService.defaultUrl('Test/ValidateRoute'), { Path: childRoute.routeConfig?.path })
-      .pipe(
-        tap(value => {
-          console.log(value);
-        }),
-        map((value: any) => {
-          if (value.Success) {
-            return true;
-          } else {
-            return false;
-          }
-        }),
-        catchError((error) => {
-          // this.router.navigate(['/login']);
-          return of(false);
-        })
-      );
+      // return this.httpClient.post(this.endpointUtilService.defaultUrl('Test/ValidateRoute'), { Path: childRoute.routeConfig?.path })
+      // .pipe(
+      //   tap(value => {
+      //     console.log(value);
+      //   }),
+      //   map((value: any) => {
+      //     if (value.Success) {
+      //       return true;
+      //     } else {
+      //       return false;
+      //     }
+      //   }),
+      //   catchError((error) => {
+      //     // this.router.navigate(['/login']);
+      //     return of(false);
+      //   })
+      // );
+      return of(true);
   }
   canDeactivate(
     component: unknown,

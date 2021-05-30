@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { BehaviorSubject } from 'rxjs';
 import { Test01FormModel } from '../../model/test01/test01-form-model';
 import { Test01Model } from '../../model/test01/test01-model';
 import { Test01Service } from '../../service/test01.service';
@@ -18,6 +19,8 @@ export class Test01Component implements OnInit {
 
   test01Model = new Test01Model();
   test01FormModel = new Test01FormModel();
+
+  //behavior = new BehaviorSubject<string>('');
 
   constructor(private router: Router,
     private test01Service: Test01Service,
@@ -53,6 +56,11 @@ export class Test01Component implements OnInit {
     this.test01FormModel.Age = null;
     this.test01StoreService.setTest01FormModel(this.test01FormModel);
     this.router.navigate(['test02']);
+  }
+
+  onChangeFormName(event: Event): void {
+    const htmlInputElement = (event.target as HTMLInputElement);
+    console.log(htmlInputElement.value);
   }
 
 }
