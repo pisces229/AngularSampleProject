@@ -1,4 +1,9 @@
 import { Injectable } from '@angular/core';
+// core
+
+// shared
+
+// page
 import { Test02StoreService } from '../store/test02-store.service';
 
 @Injectable({

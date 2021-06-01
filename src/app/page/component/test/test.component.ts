@@ -3,11 +3,18 @@ import { Router } from '@angular/router';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { finalize } from 'rxjs/operators';
 
-import { DownloadUtilService } from '../../../core/util/download-util.service';
+// core
+import { DownloadUtilService } from 'src/app/core/util/download-util.service';
+import { CommonPageModel } from 'src/app/core/model/common/common-page-model';
+import { CommonAjaxPageModel } from 'src/app/core/model/common/common-ajax-page-model';
+// shared
+
+// page
+import { TestService } from '../../service/test.service';
 import { TestAjaxInsertInputModel } from '../../model/test/test-ajax-insert-input-model';
+import { TestAjaxQueryInputModel } from '../../model/test/test-ajax-query-input-model';
 import { TestAjaxUpdateInputModel } from '../../model/test/test-ajax-update-input-model';
 import { TestAjaxValueInputModel } from '../../model/test/test-ajax-value-input-model';
-import { TestService } from '../../service/test.service';
 
 @Component({
   selector: 'app-test',
@@ -20,6 +27,7 @@ export class TestComponent implements OnInit {
 
   items = ["test01", "test02"];
   uploadFiles!: FileList;
+  rowString!: string;
 
   constructor(private router: Router,
     private testService: TestService,
@@ -174,10 +182,14 @@ export class TestComponent implements OnInit {
 
   onClickQuery(): void {
     this.blockUI.start();
-    this.testService.query()
+    let postData = new TestAjaxQueryInputModel();
+    this.testService.queryWhere(postData)
     .pipe(finalize(() => this.blockUI.stop()))
     .subscribe(
       value => {
+        if (value.Data.length > 0) {
+          this.rowString = value.Data[0].ROW;
+        }
         console.log(value);
       },
       error => {
@@ -210,8 +222,8 @@ export class TestComponent implements OnInit {
 
   onClickUpdate(): void {
     let postData = new TestAjaxUpdateInputModel();
-    postData.ROW = 1;
-    postData.NAME = "CC";
+    postData.ROW = this.rowString;
+    postData.NAME = "AA";
     postData.MAKE_DATE = new Date();
     postData.SALE_AMT = -1000;
     postData.SALE_DATE = new Date();
@@ -233,10 +245,31 @@ export class TestComponent implements OnInit {
   }
 
   onClickDelete(): void {
-    let postData = 1;
-    //let postData = JSON.stringify(1);
+    //let postData = 1;
+    let postData = JSON.stringify(this.rowString);
     this.blockUI.start();
     this.testService.delete(postData)
+    .pipe(finalize(() => this.blockUI.stop()))
+    .subscribe(
+      value => {
+        console.log(value);
+      },
+      error => {
+        // error do something
+      },
+      () => {
+        // complete do something
+    });
+  }
+
+  onClickQueryGrid(): void {
+    this.blockUI.start();
+    let postData = new CommonAjaxPageModel<TestAjaxQueryInputModel>();
+    postData.Data = new TestAjaxQueryInputModel();
+    postData.Page = new CommonPageModel();
+    postData.Page.PageNo = 2;
+    postData.Page.PageSize = 10;
+    this.testService.queryGrid(postData)
     .pipe(finalize(() => this.blockUI.stop()))
     .subscribe(
       value => {

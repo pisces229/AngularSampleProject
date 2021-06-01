@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+// core
 
+// shared
+
+// page
 import { Test02Service } from '../../service/test02.service';
 import { Test02StoreService } from '../../store/test02-store.service';
 import { Test02Model } from '../../model/test02/test02-model';

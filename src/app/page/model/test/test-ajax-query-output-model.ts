@@ -1,5 +1,5 @@
 export class TestAjaxQueryOutputModel {
-  ROW!: number;
+  ROW!: string;
   NAME!: string;
   MAKE_DATE!: Date;
   SALE_AMT!: number;

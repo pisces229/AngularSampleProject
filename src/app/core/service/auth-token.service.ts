@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
-
+// core
 import { AuthTokenStoreService } from '../store/auth-token-store.service';
 import { EndpointUtilService } from '../util/endpoint-util.service';
 

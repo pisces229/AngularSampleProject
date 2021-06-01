@@ -1,5 +1,9 @@
 import { visitValue } from '@angular/compiler/src/util';
 import { Pipe, PipeTransform } from '@angular/core';
+// core
+
+// shared
+
 @Pipe({
   name: 'numberFormat'
 })

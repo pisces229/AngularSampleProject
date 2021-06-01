@@ -4,14 +4,21 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 
+// core
 import { AuthTokenStoreService } from 'src/app/core/store/auth-token-store.service';
 import { EndpointUtilService } from 'src/app/core/util/endpoint-util.service';
-import { DefaultAjaxOutputModel } from 'src/app/core/model/default/default-ajax-output-model';
+import { CommonAjaxOutputModel } from 'src/app/core/model/common/common-ajax-output-model';
+import { CommonAjaxPageModel } from 'src/app/core/model/common/common-ajax-page-model';
+// shared
+
+// page
 import { TestAjaxQueryOutputModel } from '../model/test/test-ajax-query-output-model';
 import { TestAjaxInsertInputModel } from '../model/test/test-ajax-insert-input-model';
 import { TestAjaxUpdateInputModel } from '../model/test/test-ajax-update-input-model';
 import { TestAjaxValueInputModel } from '../model/test/test-ajax-value-input-model';
 import { TestAjaxValueOutputModel } from '../model/test/test-ajax-value-output-model';
+import { TestAjaxQueryInputModel } from '../model/test/test-ajax-query-input-model';
+
 
 
 @Injectable({
@@ -101,33 +108,43 @@ export class TestService {
     return of(true);
   }
 
-  query(): Observable<DefaultAjaxOutputModel<TestAjaxQueryOutputModel>> {
+  queryWhere(postData: TestAjaxQueryInputModel): Observable<CommonAjaxOutputModel<TestAjaxQueryOutputModel[]>> {
     return this.httpClient
-      .get<DefaultAjaxOutputModel<TestAjaxQueryOutputModel>>(this.endpointUtilService.defaultUrl('Test/Query'));
+      .get<CommonAjaxOutputModel<TestAjaxQueryOutputModel[]>>(this.endpointUtilService.defaultUrl('Test/QueryWhere'));
   }
 
-  insert(postData: TestAjaxInsertInputModel): Observable<DefaultAjaxOutputModel<string>> {
+  insert(postData: TestAjaxInsertInputModel): Observable<CommonAjaxOutputModel<string>> {
     return this.httpClient
-      .post<DefaultAjaxOutputModel<string>>(this.endpointUtilService.defaultUrl('Test/Insert'), postData)
+      .post<CommonAjaxOutputModel<string>>(this.endpointUtilService.defaultUrl('Test/Insert'), postData);
   }
-  update(postData: TestAjaxUpdateInputModel): Observable<DefaultAjaxOutputModel<string>> {
+  update(postData: TestAjaxUpdateInputModel): Observable<CommonAjaxOutputModel<string>> {
     return this.httpClient
-      .post<DefaultAjaxOutputModel<string>>(this.endpointUtilService.defaultUrl('Test/Update'), postData)
-  }
-
-  delete(postData: number): Observable<DefaultAjaxOutputModel<string>> {
-    return this.httpClient
-      .post<DefaultAjaxOutputModel<string>>(this.endpointUtilService.defaultUrl('Test/Delete'), postData)
+      .post<CommonAjaxOutputModel<string>>(this.endpointUtilService.defaultUrl('Test/Update'), postData);
   }
 
-  upload(postData: FormData): Observable<DefaultAjaxOutputModel<string>> {
+  delete(postData: string): Observable<CommonAjaxOutputModel<string>> {
     return this.httpClient
-      .post<DefaultAjaxOutputModel<string>>(this.endpointUtilService.defaultUrl('Test/Upload'), postData)
+      .post<CommonAjaxOutputModel<string>>(this.endpointUtilService.defaultUrl('Test/Delete'), postData,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'text/json'
+        })
+      });
   }
 
-  uploads(postData: FormData): Observable<DefaultAjaxOutputModel<string>> {
+  queryGrid(postData: CommonAjaxPageModel<TestAjaxQueryInputModel>): Observable<CommonAjaxOutputModel<CommonAjaxPageModel<TestAjaxQueryOutputModel>>> {
     return this.httpClient
-      .post<DefaultAjaxOutputModel<string>>(this.endpointUtilService.defaultUrl('Test/Uploads'), postData)
+      .post<CommonAjaxOutputModel<CommonAjaxPageModel<TestAjaxQueryOutputModel>>>(this.endpointUtilService.defaultUrl('Test/QueryGrid'), postData);
+  }
+
+  upload(postData: FormData): Observable<CommonAjaxOutputModel<string>> {
+    return this.httpClient
+      .post<CommonAjaxOutputModel<string>>(this.endpointUtilService.defaultUrl('Test/Upload'), postData);
+  }
+
+  uploads(postData: FormData): Observable<CommonAjaxOutputModel<string>> {
+    return this.httpClient
+      .post<CommonAjaxOutputModel<string>>(this.endpointUtilService.defaultUrl('Test/Uploads'), postData);
   }
 
   getDownload(postData: any): Observable<HttpResponse<Blob>> {

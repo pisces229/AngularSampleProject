@@ -1,5 +1,5 @@
 export class TestAjaxInsertInputModel {
-  ROW!: number;
+  ROW!: string;
   NAME!: string;
   MAKE_DATE!: Date;
   SALE_AMT!: number;

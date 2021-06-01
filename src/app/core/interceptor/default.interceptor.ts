@@ -2,6 +2,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { Injectable } from '@angular/core';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, filter, take, switchMap, delay, finalize } from 'rxjs/operators';
+// core
 import { AuthTokenService } from '../service/auth-token.service';
 import { CatchErrorService } from '../service/catch-error.service';
 import { AuthTokenStoreService } from '../store/auth-token-store.service';
