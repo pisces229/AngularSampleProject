@@ -1,4 +1,7 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NumberFormatPipe } from 'src/app/shared/pipe/number-format.pipe';
 
 import { TestComponent } from './test.component';
 
@@ -8,7 +11,14 @@ describe('TestComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TestComponent ]
+      imports: [
+        RouterTestingModule,
+        HttpClientModule
+      ],
+      declarations: [
+        TestComponent,
+        NumberFormatPipe
+      ]
     })
     .compileComponents();
   });
