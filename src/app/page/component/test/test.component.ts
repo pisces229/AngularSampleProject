@@ -3,11 +3,10 @@ import { Router } from '@angular/router';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { finalize } from 'rxjs/operators';
 
-// core
-import { DownloadUtilService } from 'src/app/core/util/download-util.service';
-import { CommonPageModel } from 'src/app/core/model/common/common-page-model';
-import { CommonAjaxPageModel } from 'src/app/core/model/common/common-ajax-page-model';
 // shared
+import { DownloadUtilService } from 'src/app/shared/util/download-util.service';
+import { CommonPageModel } from 'src/app/shared/model/common/common-page-model';
+import { CommonAjaxPageModel } from 'src/app/shared/model/common/common-ajax-page-model';
 
 // page
 import { TestService } from '../../service/test.service';
@@ -15,6 +14,7 @@ import { TestAjaxInsertInputModel } from '../../model/test/test-ajax-insert-inpu
 import { TestAjaxQueryInputModel } from '../../model/test/test-ajax-query-input-model';
 import { TestAjaxUpdateInputModel } from '../../model/test/test-ajax-update-input-model';
 import { TestAjaxValueInputModel } from '../../model/test/test-ajax-value-input-model';
+import { ErrorToastService } from 'src/app/shared/service/error-toast.service';
 
 @Component({
   selector: 'app-test',
@@ -31,7 +31,8 @@ export class TestComponent implements OnInit {
 
   constructor(private router: Router,
     private testService: TestService,
-    private downloadUtilService: DownloadUtilService) { }
+    private downloadUtilService: DownloadUtilService,
+    private errorToastService: ErrorToastService) { }
 
   ngOnInit() {
 

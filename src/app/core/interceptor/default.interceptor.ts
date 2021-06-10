@@ -1,11 +1,11 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { catchError, filter, take, switchMap, delay, finalize } from 'rxjs/operators';
-// core
-import { AuthTokenService } from '../service/auth-token.service';
-import { CatchErrorService } from '../service/catch-error.service';
-import { AuthTokenStoreService } from '../store/auth-token-store.service';
+import { catchError, filter, take, switchMap } from 'rxjs/operators';
+
+import { AuthTokenService } from 'src/app/shared/service/auth-token.service';
+import { ErrorToastService } from 'src/app/shared/service/error-toast.service';
+import { AuthTokenStoreService } from 'src/app/shared/store/auth-token-store.service';
 
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
@@ -28,8 +28,8 @@ export class DefaultInterceptor implements HttpInterceptor {
         return this.handle401Error(request, next);
         // return this.handle401ErrorOnly(request, next);
       } else {
-        const catchErrorService = this.injector.get(CatchErrorService);
-        catchErrorService.pushHttpErrorResponse(error);
+        const errorToastService = this.injector.get(ErrorToastService);
+        errorToastService.pushHttpErrorResponse(error);
         return throwError(error);
       }
     }));

@@ -4,13 +4,22 @@
 
 ## Install Package
 
-* Angular HttpClient (ajax lib)
-
-    `npm install @angular/http --save `
-    
 * Bootstrap (scss)
 
     `npm install bootstrap --save `
+
+* Angular cdk
+
+    `npm install @angular/cdk --save`
+
+* Angular Material
+
+    `npm install @angular/material --save`
+    `npm install @angular/material-moment-adapter moment --save`
+
+* Angular HttpClient (ajax lib)
+
+    `npm install @angular/http --save `
 
 * Ng Block UI (Block ui)
 
@@ -32,13 +41,6 @@
 > 
 > `ng generate interceptor core/interceptor/default`
 > 
-> `ng generate service core/service/[name]`
-> 
-> `ng generate service core/store/[name]-store`
-> 
-> `ng generate class core/model/[name]/[name]-model`
->
-> `ng generate service shared/util/[name]-util`
 
 > Shared 
 > 

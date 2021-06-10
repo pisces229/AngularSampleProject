@@ -4,13 +4,11 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 
-// core
-import { AuthTokenStoreService } from 'src/app/core/store/auth-token-store.service';
-import { EndpointUtilService } from 'src/app/core/util/endpoint-util.service';
-import { CommonAjaxOutputModel } from 'src/app/core/model/common/common-ajax-output-model';
-import { CommonAjaxPageModel } from 'src/app/core/model/common/common-ajax-page-model';
 // shared
-
+import { AuthTokenStoreService } from 'src/app/shared/store/auth-token-store.service';
+import { EndpointUtilService } from 'src/app/shared/util/endpoint-util.service';
+import { CommonAjaxOutputModel } from 'src/app/shared/model/common/common-ajax-output-model';
+import { CommonAjaxPageModel } from 'src/app/shared/model/common/common-ajax-page-model';
 // page
 import { TestAjaxQueryOutputModel } from '../model/test/test-ajax-query-output-model';
 import { TestAjaxInsertInputModel } from '../model/test/test-ajax-insert-input-model';

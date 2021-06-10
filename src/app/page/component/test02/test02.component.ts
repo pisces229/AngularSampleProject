@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-// core
-
 // shared
 
 // page
