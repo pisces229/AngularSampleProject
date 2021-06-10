@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BlockUIModule } from 'ng-block-ui';
+
 // Material
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,9 +40,6 @@ import { Test02Component } from './page/component/test02/test02.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    BlockUIModule.forRoot({
-      message: 'Loading...'
-    }),
     MatProgressSpinnerModule,
     MatButtonModule,
     MatDialogModule,

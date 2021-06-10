@@ -16,6 +16,7 @@ export class ErrorToastService {
 
   pushError(error: any) {
     if (error) {
+      console.error(error);
       try {
         StackTrace.fromError(error)
         .then((value) => {
@@ -37,34 +38,32 @@ export class ErrorToastService {
 
   pushHttpErrorResponse(error: HttpErrorResponse) {
     if (error) {
-      this.push(`${error.status} ${error.statusText}`, error.message);
-      // try {
-      //   this.push(`${error.status} ${error.statusText}`, error.message);
-      // } catch {
-      //   this.push('error', JSON.stringify(error));
-      // }
+      console.error(error);
+      try {
+        this.push(`${error.status} ${error.statusText}`, error.message);
+      } catch {
+        this.push('error', JSON.stringify(error));
+      }
     }
   }
 
   push(message: string, stack: string) {
-
-    const path = location instanceof PathLocationStrategy ? location.path() : '';
-
-    console.log({ path: path, message: message, stack: stack});
-
-    if (!this.opened) {
-      this.opened = true;
-      const dialogRef = this.dialog.open(ErrorToastComponent, {
-        data: { message, stack },
-        //maxHeight: "100%",
-        //width: "540px",
-        //maxWidth: "100%",
-        //disableClose: true,
-        hasBackdrop: true
-      });
-      dialogRef.afterClosed().subscribe(() => {
-        this.opened = false;
-      });
+    try {
+      const path = location instanceof PathLocationStrategy ? location.path() : '';
+      if (!this.opened) {
+        this.opened = true;
+        const dialogRef = this.dialog.open(ErrorToastComponent, {
+          data: { message, stack },
+          disableClose: true,
+          hasBackdrop: true,
+          minWidth: "50%",
+        });
+        dialogRef.afterClosed().subscribe(() => {
+          this.opened = false;
+        });
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 }

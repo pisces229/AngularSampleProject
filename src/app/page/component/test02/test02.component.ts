@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 // shared
 
 // page
@@ -16,8 +14,6 @@ import { Test02FormModel } from '../../model/test02/test02-form-model';
   styleUrls: ['./test02.component.scss']
 })
 export class Test02Component implements OnInit {
-
-  @BlockUI() blockUI!: NgBlockUI;
 
   test02Model = new Test02Model();
   test02FormModel = new Test02FormModel();
@@ -34,13 +30,6 @@ export class Test02Component implements OnInit {
   }
 
   ngOnInit(): void {
-    // Start blocking
-    this.blockUI.start();
-    // do something
-    setTimeout(() => {
-      // Stop blocking
-      this.blockUI.stop();
-    }, 500);
   }
 
   plus(): void{

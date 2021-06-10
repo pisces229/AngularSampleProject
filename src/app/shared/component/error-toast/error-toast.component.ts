@@ -11,6 +11,6 @@ export class ErrorToastComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: { stack: string; message: number }
-  ) {}
+  ) { }
 
 }

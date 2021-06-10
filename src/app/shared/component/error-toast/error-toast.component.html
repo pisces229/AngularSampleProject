@@ -1,4 +1,4 @@
-<!-- <h1 mat-dialog-title>An error has occurred!</h1>
+<h3 mat-dialog-title>ERROR</h3>
 <mat-dialog-content class="mat-typography">
 	<p>
 		{{data.message}}
@@ -6,13 +6,7 @@
 	<p class="error-stack">
 		{{data.stack}}
 	</p>
-</mat-dialog-content> -->
-
-<mat-dialog-content>
-  <p>
-		<mat-spinner></mat-spinner>
-	</p>
-  <p>
-		Loading...
-	</p>
 </mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="warn" mat-dialog-close>Cloase</button>
+</mat-dialog-actions>

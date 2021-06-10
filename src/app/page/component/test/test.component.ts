@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { finalize } from 'rxjs/operators';
 
 // shared
@@ -14,7 +13,7 @@ import { TestAjaxInsertInputModel } from '../../model/test/test-ajax-insert-inpu
 import { TestAjaxQueryInputModel } from '../../model/test/test-ajax-query-input-model';
 import { TestAjaxUpdateInputModel } from '../../model/test/test-ajax-update-input-model';
 import { TestAjaxValueInputModel } from '../../model/test/test-ajax-value-input-model';
-import { ErrorToastService } from 'src/app/shared/service/error-toast.service';
+import { BlockToastService } from 'src/app/shared/service/block-toast.service';
 
 @Component({
   selector: 'app-test',
@@ -23,8 +22,6 @@ import { ErrorToastService } from 'src/app/shared/service/error-toast.service';
 })
 export class TestComponent implements OnInit {
 
-  @BlockUI() blockUI!: NgBlockUI;
-
   items = ["test01", "test02"];
   uploadFiles!: FileList;
   rowString!: string;
@@ -32,10 +29,16 @@ export class TestComponent implements OnInit {
   constructor(private router: Router,
     private testService: TestService,
     private downloadUtilService: DownloadUtilService,
-    private errorToastService: ErrorToastService) { }
+    private blockToastService: BlockToastService) { }
 
   ngOnInit() {
-
+    // Start blocking
+    this.blockToastService.start();
+    // do something
+    setTimeout(() => {
+      // Stop blocking
+      this.blockToastService.stop();
+    }, 1000);
   }
 
   goPage(page: string): void {
@@ -44,9 +47,9 @@ export class TestComponent implements OnInit {
   }
 
   onClickGetValueByValue(): void {
-    this.blockUI.start();
+    this.blockToastService.start();
     this.testService.getValueByValue('1234')
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         console.log(value);
@@ -60,9 +63,9 @@ export class TestComponent implements OnInit {
   }
 
   onClickPostValueByValue(): void {
-    this.blockUI.start();
+    this.blockToastService.start();
     this.testService.postValueByValue('1234')
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         console.log(value);
@@ -80,9 +83,9 @@ export class TestComponent implements OnInit {
     postData.Name = "Name123";
     postData.Count = 123;
     //postData.Date = new Date();
-    this.blockUI.start();
+    this.blockToastService.start();
     this.testService.getValueByModel(postData)
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         console.log(value);
@@ -100,9 +103,9 @@ export class TestComponent implements OnInit {
     postData.Name = "Name123";
     postData.Count = 123;
     postData.Date = new Date();
-    this.blockUI.start();
+    this.blockToastService.start();
     this.testService.postValueByModel(postData)
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         console.log(value);
@@ -116,9 +119,9 @@ export class TestComponent implements OnInit {
   }
 
   onClickSignIn(): void {
-    this.blockUI.start();
+    this.blockToastService.start();
     this.testService.signIn()
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         console.log(`SignIn:${value}`);
@@ -133,9 +136,9 @@ export class TestComponent implements OnInit {
   }
 
   onClickValidateAuth(): void {
-    this.blockUI.start();
+    this.blockToastService.start();
     this.testService.validateAuth()
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         console.log(`AuthCheck:${value}`);
@@ -149,9 +152,9 @@ export class TestComponent implements OnInit {
   }
 
   onClickRefresh(): void {
-    this.blockUI.start();
+    this.blockToastService.start();
     this.testService.Refresh()
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         console.log(`Refresh:${value}`);
@@ -165,9 +168,9 @@ export class TestComponent implements OnInit {
   }
 
   onClickSignOut(): void {
-    this.blockUI.start();
+    this.blockToastService.start();
     this.testService.signOut()
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         console.log(`SignOut:${value}`);
@@ -182,10 +185,10 @@ export class TestComponent implements OnInit {
   }
 
   onClickQuery(): void {
-    this.blockUI.start();
+    this.blockToastService.start();
     let postData = new TestAjaxQueryInputModel();
     this.testService.queryWhere(postData)
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         if (value.Data.length > 0) {
@@ -206,9 +209,9 @@ export class TestComponent implements OnInit {
     postData.NAME = "C";
     postData.MAKE_DATE = new Date();
     postData.SALE_AMT = -100;
-    this.blockUI.start();
+    this.blockToastService.start();
     this.testService.insert(postData)
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         console.log(value);
@@ -230,9 +233,9 @@ export class TestComponent implements OnInit {
     postData.SALE_DATE = new Date();
     postData.TAX = 999;
     postData.REMARK = "REMARK";
-    this.blockUI.start();
+    this.blockToastService.start();
     this.testService.update(postData)
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         console.log(value);
@@ -248,9 +251,9 @@ export class TestComponent implements OnInit {
   onClickDelete(): void {
     //let postData = 1;
     let postData = JSON.stringify(this.rowString);
-    this.blockUI.start();
+    this.blockToastService.start();
     this.testService.delete(postData)
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         console.log(value);
@@ -264,14 +267,14 @@ export class TestComponent implements OnInit {
   }
 
   onClickQueryGrid(): void {
-    this.blockUI.start();
+    this.blockToastService.start();
     let postData = new CommonAjaxPageModel<TestAjaxQueryInputModel>();
     postData.Data = new TestAjaxQueryInputModel();
     postData.Page = new CommonPageModel();
     postData.Page.PageNo = 2;
     postData.Page.PageSize = 10;
     this.testService.queryGrid(postData)
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         console.log(value);
@@ -294,9 +297,9 @@ export class TestComponent implements OnInit {
       postData.append('UPLOAD_FILE', this.uploadFiles[0]);
       postData.append('UPLOAD_NAME', 'UPLOAD_NAME');
       postData.append('UPLOAD_TYPE', 'UPLOAD_TYPE');
-      this.blockUI.start();
+      this.blockToastService.start();
       this.testService.upload(postData)
-      .pipe(finalize(() => this.blockUI.stop()))
+      .pipe(finalize(() => this.blockToastService.stop()))
       .subscribe(
         value => {
           console.log(value);
@@ -320,9 +323,9 @@ export class TestComponent implements OnInit {
         postData.append(`[${index}].UPLOAD_NAME`, `UPLOAD_NAME_${index}`);
         postData.append(`[${index}].UPLOAD_TYPE`, `UPLOAD_TYPE_${index}`);
       });
-      this.blockUI.start();
+      this.blockToastService.start();
       this.testService.uploads(postData)
-      .pipe(finalize(() => this.blockUI.stop()))
+      .pipe(finalize(() => this.blockToastService.stop()))
       .subscribe(
         value => {
           console.log(value);
@@ -340,9 +343,9 @@ export class TestComponent implements OnInit {
 
   onClickGetDownload(): void {
     let postData = {};
-    this.blockUI.start();
+    this.blockToastService.start();
     this.testService.getDownload(postData)
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         this.downloadUtilService.create(value);
@@ -358,9 +361,9 @@ export class TestComponent implements OnInit {
 
   onClickPostDownload(): void {
     let postData = {};
-    this.blockUI.start();
+    this.blockToastService.start();
     this.testService.postDownload(postData)
-    .pipe(finalize(() => this.blockUI.stop()))
+    .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
         this.downloadUtilService.create(value);
