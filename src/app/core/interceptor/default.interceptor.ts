@@ -1,5 +1,5 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, filter, take, switchMap, delay, finalize } from 'rxjs/operators';
 // core
@@ -13,9 +13,9 @@ export class DefaultInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private authTokenService: AuthTokenService,
-    private authTokenStoreService: AuthTokenStoreService,
-    private catchErrorService: CatchErrorService) { }
+  constructor(private injector: Injector,
+    private authTokenService: AuthTokenService,
+    private authTokenStoreService: AuthTokenStoreService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log('DefaultInterceptor');
@@ -28,7 +28,8 @@ export class DefaultInterceptor implements HttpInterceptor {
         return this.handle401Error(request, next);
         // return this.handle401ErrorOnly(request, next);
       } else {
-        this.catchErrorService.push(error);
+        const catchErrorService = this.injector.get(CatchErrorService);
+        catchErrorService.pushHttpErrorResponse(error);
         return throwError(error);
       }
     }));

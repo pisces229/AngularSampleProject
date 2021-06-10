@@ -1,7 +1,7 @@
 import { NothingInterceptor } from './core/interceptor/nothing.interceptor';
 import { HttpBackend, HttpClient, HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { HttpInterceptorHandler } from './core/http-handler/http-interceptor-handler';
+import { Component, Injector } from '@angular/core';
+import { HttpInterceptorHandler } from './core/handler/http-interceptor-handler';
 import { EndpointUtilService } from './core/util/endpoint-util.service';
 
 @Component({
@@ -11,7 +11,8 @@ import { EndpointUtilService } from './core/util/endpoint-util.service';
 })
 export class AppComponent {
   title = 'AngularSampleProject';
-  constructor(private httpClient: HttpClient,
+  constructor(private injector: Injector,
+    private httpClient: HttpClient,
     private httpBackend: HttpBackend,
     private endpointUtilService: EndpointUtilService) {
     {
@@ -19,7 +20,7 @@ export class AppComponent {
     }
     {
       // create new HttpClient with Interceptor
-      let httpClient = new HttpClient(new HttpInterceptorHandler(httpBackend, new NothingInterceptor()));
+      let httpClient = new HttpClient(new HttpInterceptorHandler(httpBackend, new NothingInterceptor(this.injector)));
       httpClient.get(endpointUtilService.defaultUrl('assets/test.json')).subscribe(value => console.log(value));
     }
   }
