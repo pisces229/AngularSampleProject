@@ -15,20 +15,16 @@ import { AppComponent } from './app.component';
 import { GlobalErrorHandler } from './core/handler/global-error-handler';
 import { DefaultInterceptor } from './core/interceptor/default.interceptor';
 // shared
-import { BlockToastComponent } from './shared/component/block-toast/block-toast.component';
-import { ErrorToastComponent } from './shared/component/error-toast/error-toast.component';
+import { SharedToastModule } from './shared/shared.toast.module';
 import { NumberFormatPipe } from './shared/pipe/number-format.pipe';
 // page
 import { TestComponent } from './page/component/test/test.component';
 import { Test01Component } from './page/component/test01/test01.component';
 import { Test02Component } from './page/component/test02/test02.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
-    BlockToastComponent,
-    ErrorToastComponent,
     NumberFormatPipe,
     TestComponent,
     Test01Component,
@@ -40,9 +36,7 @@ import { Test02Component } from './page/component/test02/test02.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    MatProgressSpinnerModule,
-    MatButtonModule,
-    MatDialogModule,
+    SharedToastModule
   ],
   providers: [
     {

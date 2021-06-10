@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BlockToastComponent } from '../component/block-toast/block-toast.component';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class BlockToastService {
 
   private opened = false;

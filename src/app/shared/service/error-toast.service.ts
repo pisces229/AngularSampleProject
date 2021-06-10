@@ -5,9 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import * as StackTrace from 'stacktrace-js';
 import { ErrorToastComponent } from '../component/error-toast/error-toast.component';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ErrorToastService {
 
   private opened = false;

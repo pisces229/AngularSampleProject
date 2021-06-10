@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
@@ -26,6 +26,8 @@ export class TestComponent implements OnInit {
   uploadFiles!: FileList;
   rowString!: string;
 
+  @ViewChild('viewChildElementHeader') viewChildElementHeader!: ElementRef<any>;
+
   constructor(private router: Router,
     private testService: TestService,
     private downloadUtilService: DownloadUtilService,
@@ -39,6 +41,7 @@ export class TestComponent implements OnInit {
       // Stop blocking
       this.blockToastService.stop();
     }, 1000);
+    //this.viewChildElementHeader.nativeElement;
   }
 
   goPage(page: string): void {
