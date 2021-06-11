@@ -52,7 +52,7 @@ export class TestComponent implements OnInit {
   }
 
   onClickGetValueByValue(): void {
-    this.viewChildElementHeader.nativeElement;
+    //this.viewChildElementHeader.nativeElement;
     this.blockToastService.start();
     this.testService.getValueByValue('1234')
     .pipe(finalize(() => this.blockToastService.stop()))

@@ -22,16 +22,18 @@ export class ErrorToastService {
   constructor(private injector: Injector,
     private overlay: Overlay,
     private ngZone: NgZone) {
-    const strategy = this.overlay
+    const positionStrategy = this.overlay
       .position()
       .global()
       .centerHorizontally()
       .centerVertically();
+    const scrollStrategy = this.overlay.scrollStrategies.block();
     this.overlayConfig = new OverlayConfig({
       maxWidth: "100%",
       maxHeight: "50%",
       hasBackdrop: true,
-      positionStrategy: strategy,
+      positionStrategy: positionStrategy,
+      scrollStrategy: scrollStrategy
     });
   }
 

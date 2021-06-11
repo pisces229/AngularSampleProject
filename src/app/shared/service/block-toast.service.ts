@@ -20,14 +20,16 @@ export class BlockToastService {
   constructor(private injector: Injector,
     private overlay: Overlay,
     private ngZone: NgZone) {
-    const strategy = this.overlay
+    const positionStrategy = this.overlay
       .position()
       .global()
       .centerHorizontally()
       .centerVertically();
+    const scrollStrategy = this.overlay.scrollStrategies.block();
     this.overlayConfig = new OverlayConfig({
       hasBackdrop: true,
-      positionStrategy: strategy,
+      positionStrategy: positionStrategy,
+      scrollStrategy: scrollStrategy
     });
   }
 
