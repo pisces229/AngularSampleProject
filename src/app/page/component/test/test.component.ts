@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
@@ -31,7 +31,9 @@ export class TestComponent implements OnInit {
   constructor(private router: Router,
     private testService: TestService,
     private downloadUtilService: DownloadUtilService,
-    private blockToastService: BlockToastService) { }
+    private blockToastService: BlockToastService) {
+      //this.viewChildElementHeader.nativeElement;
+  }
 
   ngOnInit() {
     // Start blocking
@@ -50,6 +52,7 @@ export class TestComponent implements OnInit {
   }
 
   onClickGetValueByValue(): void {
+    this.viewChildElementHeader.nativeElement;
     this.blockToastService.start();
     this.testService.getValueByValue('1234')
     .pipe(finalize(() => this.blockToastService.stop()))

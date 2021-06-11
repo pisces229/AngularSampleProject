@@ -1,12 +1,10 @@
-<h3 mat-dialog-title>ERROR</h3>
-<mat-dialog-content class="mat-typography">
-	<p>
-		{{data.message}}
+<section>
+  <h2>ERROR</h2>
+	<p class="message">
+		{{value?.message}}
 	</p>
-	<p class="error-stack">
-		{{data.stack}}
+	<p class="stack">
+		{{value?.stack}}
 	</p>
-</mat-dialog-content>
-<mat-dialog-actions align="center">
-  <button mat-raised-button color="warn" mat-dialog-close>Cloase</button>
-</mat-dialog-actions>
+  <button class="" (click)="onClickClose()">close</button>
+</section>

@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { Observable, Subject } from 'rxjs';
+import { ERROR_TOAST_DATA } from '../../service/error-toast.service';
 
 @Component({
   selector: 'app-error-toast',
@@ -8,9 +10,14 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 })
 export class ErrorToastComponent {
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA)
-    public data: { stack: string; message: number }
-  ) { }
+  private subject = new Subject<void>();
+  observable$: Observable<void> = this.subject.asObservable();
+
+  constructor(@Inject(ERROR_TOAST_DATA) public value: { message: string; stack: string }) {}
+
+  onClickClose(): void {
+    this.subject.next();
+    this.subject.complete();
+  }
 
 }

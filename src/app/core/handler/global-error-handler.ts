@@ -9,7 +9,6 @@ export class GlobalErrorHandler implements ErrorHandler {
   handleError(error: any) {
     const errorToastService = this.injector.get(ErrorToastService);
     errorToastService.pushError(error);
-    throw error;
   }
 
 }

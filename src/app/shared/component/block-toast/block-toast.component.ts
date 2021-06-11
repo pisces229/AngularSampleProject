@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { BLOCK_TOAST_DATA } from '../../service/block-toast.service';
 
 @Component({
   selector: 'app-block-toast',
   templateUrl: './block-toast.component.html',
   styleUrls: ['./block-toast.component.scss']
 })
-export class BlockToastComponent implements OnInit {
+export class BlockToastComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  constructor(@Inject(BLOCK_TOAST_DATA) public value: { message: string }) { }
 
 }

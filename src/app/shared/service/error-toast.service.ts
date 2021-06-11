@@ -1,20 +1,42 @@
+import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { PathLocationStrategy } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { ComponentRef, Injectable, InjectionToken, Injector, NgZone } from '@angular/core';
 import * as StackTrace from 'stacktrace-js';
 import { ErrorToastComponent } from '../component/error-toast/error-toast.component';
 
-@Injectable()
+export const ERROR_TOAST_DATA = new InjectionToken<{}>('ERROR_TOAST_DATA');
+
+@Injectable({
+  providedIn: 'root'
+})
 export class ErrorToastService {
 
   private opened = false;
+  private overlayConfig!: OverlayConfig;
+  private overlayRef!: OverlayRef;
+  private componentPortal!: ComponentPortal<ErrorToastComponent>;
+  private componentRef!: ComponentRef<ErrorToastComponent>;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private injector: Injector,
+    private overlay: Overlay,
+    private ngZone: NgZone) {
+    const strategy = this.overlay
+      .position()
+      .global()
+      .centerHorizontally()
+      .centerVertically();
+    this.overlayConfig = new OverlayConfig({
+      maxWidth: "100%",
+      maxHeight: "50%",
+      hasBackdrop: true,
+      positionStrategy: strategy,
+    });
+  }
 
   pushError(error: any) {
     if (error) {
-      console.error(error);
       try {
         StackTrace.fromError(error)
         .then((value) => {
@@ -31,17 +53,18 @@ export class ErrorToastService {
       } catch {
         this.push('error', JSON.stringify(error));
       }
+      throw error;
     }
   }
 
   pushHttpErrorResponse(error: HttpErrorResponse) {
     if (error) {
-      console.error(error);
       try {
         this.push(`${error.status} ${error.statusText}`, error.message);
       } catch {
         this.push('error', JSON.stringify(error));
       }
+      throw error;
     }
   }
 
@@ -50,18 +73,33 @@ export class ErrorToastService {
       const path = location instanceof PathLocationStrategy ? location.path() : '';
       if (!this.opened) {
         this.opened = true;
-        const dialogRef = this.dialog.open(ErrorToastComponent, {
-          data: { message, stack },
-          disableClose: true,
-          hasBackdrop: true,
-          minWidth: "50%",
-        });
-        dialogRef.afterClosed().subscribe(() => {
-          this.opened = false;
+        this.opened = true;
+        this.overlayRef = this.overlay.create(this.overlayConfig);
+        this.componentPortal = new ComponentPortal(
+          ErrorToastComponent,
+          null,
+          Injector.create({
+            parent: this.injector,
+            providers: [
+              {
+                provide: ERROR_TOAST_DATA,
+                useValue: { message, stack }
+              }
+            ]
+          }));
+        this.componentRef = this.overlayRef.attach(this.componentPortal);
+        this.ngZone.run(() => {
+          this.componentRef.instance.observable$.subscribe(() => {
+            this.overlayRef.detach();
+            this.overlayRef.dispose();
+            this.componentRef.destroy();
+            this.opened = false;
+          });
         });
       }
     } catch (error) {
       console.error(error);
     }
   }
+
 }
