@@ -17,6 +17,11 @@ const routes: Routes = [
   {
     path: 'test02',
     component: Test02Component
+  },
+  {
+    path: '**',
+    redirectTo: '/',
+    pathMatch: 'full'
   }
 ];
 
