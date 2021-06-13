@@ -3,33 +3,18 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { DefaultGuard } from './core/guard/default.guard';
 
-// Page Component
-import { TestComponent } from './page/component/test/test.component';
-import { Test01Component } from './page/component/test01/test01.component';
-import { Test02Component } from './page/component/test02/test02.component';
-
 const routes: Routes = [
   {
-    path: '',
-    component: TestComponent,
+    path: 'test',
     canActivate: [DefaultGuard],
     canActivateChild: [DefaultGuard],
     canDeactivate: [DefaultGuard],
     canLoad: [DefaultGuard],
-    children: [
-      {
-        path: 'test01',
-        component: Test01Component
-      },
-      {
-        path: 'test02',
-        component: Test02Component
-      }
-    ]
+    loadChildren: () => import('./page/test/test.module').then(m => m.TestModule)
   },
   {
     path: '**',
-    redirectTo: 'test01',
+    redirectTo: '',
     pathMatch: 'full'
   }
 ];

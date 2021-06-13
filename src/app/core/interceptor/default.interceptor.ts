@@ -4,7 +4,7 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, filter, take, switchMap } from 'rxjs/operators';
 
 import { AuthTokenService } from 'src/app/shared/service/auth-token.service';
-import { ErrorToastService } from 'src/app/shared/service/error-toast.service';
+import { ErrorToastService } from 'src/app/shared/component/error-toast/error-toast.service';
 import { AuthTokenStoreService } from 'src/app/shared/store/auth-token-store.service';
 
 @Injectable()

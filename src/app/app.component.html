@@ -1,3 +1,20 @@
-<block-ui>
-  <router-outlet></router-outlet>
-</block-ui>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <label>NumberFormatPipe:{{ '123456789' | numberFormat }}</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <p>Menu</p>
+      <p *ngFor="let item of items">
+        <a href="javascript:void(0)" (click)="goPage(item)">{{item}}</a>
+      </p>
+    </div>
+    <div class="col-9">
+      <label>Content</label>
+      <br>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

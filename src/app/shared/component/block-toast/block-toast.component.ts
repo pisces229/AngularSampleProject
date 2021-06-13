@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { BLOCK_TOAST_DATA } from '../../service/block-toast.service';
+import { Component, Inject } from '@angular/core';
+import { BLOCK_TOAST_DATA } from './block-toast.service';
 
 @Component({
   selector: 'app-block-toast',

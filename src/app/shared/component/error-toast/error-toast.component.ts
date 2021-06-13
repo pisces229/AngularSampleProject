@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Observable, Subject } from 'rxjs';
-import { ERROR_TOAST_DATA } from '../../service/error-toast.service';
+import { ERROR_TOAST_DATA } from './error-toast.service';
 
 @Component({
   selector: 'app-error-toast',

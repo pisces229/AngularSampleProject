@@ -1,0 +1,29 @@
+<p class="import-assets-css test-scss">test02 works!</p>
+<label>NumberFormatPipe:{{ '123456789' | numberFormat }}</label>
+<div class="container">
+  <div class="row form-group">
+    <div class="col">
+      <p>{{test02Model.Count}}</p>
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col">
+      <input type="text" [(ngModel)]="test02FormModel.Name" />
+    </div>
+    <div class="col">
+      <input type="text" [(ngModel)]="test02FormModel.Age" />
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col">
+      <button (click)="plus()">+</button>
+    </div>
+    <div class="col">
+      <button (click)="minus()">-</button>
+    </div>
+    <div class="col">
+      <button (click)="go()">Go</button>
+    </div>
+  </div>
+</div>
+

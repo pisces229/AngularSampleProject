@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanDeactivate, C
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { EndpointUtilService } from 'src/app/shared/util/endpoint-util.service';
+import { EndpointService } from 'src/app/shared/service/endpoint.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class DefaultGuard implements CanActivate, CanActivateChild, CanDeactivat
 
   constructor(private router: Router,
     private httpClient: HttpClient,
-    private endpointUtilService: EndpointUtilService) { }
+    private endpointService: EndpointService) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -33,7 +33,7 @@ export class DefaultGuard implements CanActivate, CanActivateChild, CanDeactivat
       // console.log(state);
       // console.log(childRoute.routeConfig?.path);
       // console.log('DefaultGuard canActivateChild');
-      // return this.httpClient.post(this.endpointUtilService.defaultUrl('Test/ValidateRoute'), { Path: childRoute.routeConfig?.path })
+      // return this.httpClient.post(this.endpointService.defaultUrl('Test/ValidateRoute'), { Path: childRoute.routeConfig?.path })
       // .pipe(
       //   tap(value => {
       //     console.log(value);
