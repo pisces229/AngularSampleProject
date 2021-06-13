@@ -1,74 +1,40 @@
 ## Create Project
-
-`ng new AngularSampleProject --routing --style=scss`
-
+  `ng new [project] --routing --style=scss`
 ## Install Package
+#### Bootstrap (scss)
+  `npm install bootstrap --save`
+#### Angular cdk
+  `npm install @angular/cdk --save`
+#### Angular Material
+  `npm install @angular/material --save`
 
-* Bootstrap (scss)
-
-    `npm install bootstrap --save `
-
-* Angular cdk
-
-    `npm install @angular/cdk --save`
-
-* Angular Material
-
-    `npm install @angular/material --save`
-    `npm install @angular/material-moment-adapter moment --save`
-
-* Angular HttpClient (ajax lib)
-
-    `npm install @angular/http --save `
-
-* Ng Block UI (Block ui)
-
-    `npm install ng-block-ui --save `
-
-* File Saver (ajax download)
-
-    `npm install file-saver @types/file-saver --save `
-
-* stacktrace-js
-
-    `npm install stacktrace-js --save`
-
+  `npm install @angular/material-moment-adapter moment --save`
+#### Angular HttpClient (ajax lib)
+  `npm install @angular/http --save `
+#### File Saver (ajax download)
+  `npm install file-saver @types/file-saver --save `
+#### stacktrace-js
+  `npm install stacktrace-js --save`
 ## [Create Command](https://angular.io/cli/generate#guard-command)
 
-> Core 
-> 
-> `ng generate guard core/guard/default`
-> 
-> `ng generate interceptor core/interceptor/default`
-> 
+  `ng generate module [path]/[name]`
 
-> Shared 
-> 
-> `ng generate component shared/component/[name]`
-> 
-> `ng generate service shared/service/[name]`
-> 
-> `ng generate service shared/store/[name]-store`
-> 
-> `ng generate class shared/model/[name]/[name]-model`
-> 
-> `ng generate pipe shared/pipe/[name]`
-> 
-> `ng generate directive shared/directive/[name]`
-> 
-> `ng generate service shared/util/[name]-util`
+  `ng generate guard [path]/[name]`
 
-> Page 
-> 
-> `ng generate component page/component/[name]`
-> 
-> `ng generate service page/service/[name]`
-> 
-> `ng generate service page/store/[name]-store`
-> 
-> `ng generate class page/model/[name]/[name]-model`
+  `ng generate interceptor [path]/[name]`
 
-> skip test file (\[name\].spec.ts) `--skip-tests=true`
+  `ng generate class [path]/[name]`
 
---------------------------------------------------
+  `ng generate component [path]/[name]`
+
+  `ng generate pipe [path]/[name]`
+
+  `ng generate directive [path]/[name]`
+
+  `--routing`
+
+  `--skip-import`
+
+  `--skip-tests=true`
+
 

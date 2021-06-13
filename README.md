@@ -1,58 +1,41 @@
-## 功能分層
-> app
-> * core
-> > 核心功能
-> > * guard
-> > > 路由守衛
-> > > * [name].guard.ts
-> > * handler
-> > > 處理程序
-> > > * [name].handler.ts
-> > * interceptor
-> > > 攔截器
-> > > * [name].interceptor
-> * shared
-> > 共用功能
-> > * component
-> > > 共用組件
-> > > * [name]
-> > > > * [name].component.ts
-> > > > * [name].component.html
-> > > > * [name].component.scss
-> > * service
-> > > 共用邏輯服務
-> > > * [name].service.ts
-> > * store
-> > > 共用邏輯服務狀態管理
-> > > * [name]-store.service.ts
-> > * model
-> > > 共用邏輯服務資料結構
-> > > * [name]
-> > > > * [name]-model.ts
-> > * directive
-> > > 共用Directive
-> > > * [name].directive.ts
-> > * pipe
-> > > 共用Pipe
-> > > * [name].pipe.ts
-> > * util
-> > > 共用方法
-> > > * [name]-util.service.ts
-> * page
-> > 頁面功能
-> > * component
-> > > 頁面組件
-> > > * [name]
-> > > > * [name].component.ts
-> > > > * [name].component.html
-> > > > * [name].component.scss
-> > * service
-> > > 頁面組件服務
-> > > * [name].service.ts
-> > * store
-> > > 頁面組件服務狀態管理
-> > > * [name]-store.service.ts
-> > * model
-> > > 頁面組件服務資料結構
-> > > * [name]
-> > > > * [name]-model.ts
+## app
+    core (核心)
+    shared (共用)
+    page (頁面)
+### core (核心)
+    guard (路由守衛)
+        [name].guard.ts
+    handler (處理程序)
+        [name].handler.ts
+    interceptor (攔截器)
+        [name].interceptor.ts
+### shared (共用)
+    component (元件)
+        [name]
+            [name].component.ts
+            [name].component.html
+            [name].component.scss
+            [name]-model.ts  
+            [name].service.ts
+    pipe (Pipe)
+        [name].pipe.ts
+    model (資料結構)
+        [name]-model.ts
+    service (服務)
+        [name].service.ts
+    store (狀態管理)
+        [name]-store.service.ts
+    shared-componnet.module.ts
+    shared-pipe.module.ts
+### page (頁面)
+    [parent] (頁面模組)
+        [child] (頁面)
+            [child].component.ts
+            [child].component.html
+            [child].component.scss
+            [child]-model.ts
+            [child].service.ts 
+            [child]-store.service.ts 
+        [parent]-routing.module.ts
+        [parent].module.ts
+
