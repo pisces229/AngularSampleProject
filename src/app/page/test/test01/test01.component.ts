@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { BlockToastService } from 'src/app/shared/component/block-toast/block-toast.service';
 import { RouteDataService } from 'src/app/shared/service/route-data.service';
 import { AppRoutingPath } from 'src/app/app-routing-path';
 import { TestRoutingPath } from '../test-routing-path';
@@ -27,7 +28,8 @@ export class Test01Component implements OnInit {
   constructor(private router: Router,
     private routeDataService: RouteDataService,
     private test01Service: Test01Service,
-    private test01StoreService: Test01StoreService) {
+    private test01StoreService: Test01StoreService,
+    private blockToastService: BlockToastService) {
       let routeUrl = this.routeDataService.url(AppRoutingPath.Test, TestRoutingPath.Test01);
       console.log('routeDataService', routeDataService.get<any>(routeUrl));
       if (this.test01StoreService.getTest01Model()) {
@@ -39,6 +41,13 @@ export class Test01Component implements OnInit {
   }
 
   ngOnInit(): void {
+    // Start blocking
+    this.blockToastService.start();
+    // do something
+    setTimeout(() => {
+      // Stop blocking
+      this.blockToastService.stop();
+    }, 1000);
   }
 
   plus(): void{
