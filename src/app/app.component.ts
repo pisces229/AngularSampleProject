@@ -41,6 +41,7 @@ export class AppComponent {
       injector.get(Test00StoreService);
       injector.get(Test01StoreService);
       injector.get(Test02StoreService);
+
     // {
     //   httpClient.get(endpointUtilService.defaultUrl('assets/test.json')).subscribe(value => console.log(value));
     // }

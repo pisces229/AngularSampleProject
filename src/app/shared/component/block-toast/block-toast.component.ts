@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { BLOCK_TOAST_DATA } from './block-toast.service';
+import { BLOCK_TOAST_TOKEN } from './block-toast-token';
 
 @Component({
   selector: 'app-block-toast',
@@ -8,6 +8,6 @@ import { BLOCK_TOAST_DATA } from './block-toast.service';
 })
 export class BlockToastComponent {
 
-  constructor(@Inject(BLOCK_TOAST_DATA) public value: { message: string }) { }
+  constructor(@Inject(BLOCK_TOAST_TOKEN) public value: { message: string }) { }
 
 }

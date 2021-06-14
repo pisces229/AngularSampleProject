@@ -7,4 +7,4 @@ import { OverlayModule } from "@angular/cdk/overlay";
     OverlayModule,
   ]
 })
-export class AngularCdkModule { }
+export class SharedAngularCdkModule { }

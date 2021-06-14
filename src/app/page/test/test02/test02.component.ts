@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// shared
 
-// page
+import { RouteDataService } from 'src/app/shared/service/route-data.service';
+import { AppRoutingPath } from 'src/app/app-routing-path';
+import { TestRoutingPath } from '../test-routing-path';
 import { Test02Service } from './test02.service';
 import { Test02StoreService } from './test02-store.service';
 import {
@@ -21,8 +22,11 @@ export class Test02Component implements OnInit {
   test02FormModel = new Test02FormModel();
 
   constructor(private router: Router,
+    private routeDataService: RouteDataService,
     private test02Service: Test02Service,
     private test02StoreService: Test02StoreService) {
+      let routeUrl = this.routeDataService.url(AppRoutingPath.Test, TestRoutingPath.Test02);
+      console.log('routeDataService', routeDataService.get<any>(routeUrl));
       if (test02StoreService.getTest02Model()) {
         this.test02Model = this.test02StoreService.getTest02Model();
       }
@@ -43,10 +47,14 @@ export class Test02Component implements OnInit {
   }
 
   go(): void {
+    // keep state
     this.test02StoreService.setTest02Model(this.test02Model);
     this.test02FormModel.Age = null;
     this.test02StoreService.setTest02FormModel(this.test02FormModel);
-    this.router.navigate(['test/test01']);
+    // post data
+    let routeUrl = this.routeDataService.url(AppRoutingPath.Test, TestRoutingPath.Test01);
+    this.routeDataService.set(routeUrl, { routeUrl });
+    this.router.navigate([routeUrl]);
   }
 
 }

@@ -7,8 +7,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AngularCdkModule } from './angular-cdk.module';
-import { AngularMaterialModule } from './angular-material.module';
+import { SharedAngularCdkModule } from './import-angular-cdk.module';
+import { SharedAngularMaterialModule } from './import-angular-material.module';
 // core
 import { GlobalErrorHandler } from './core/handler/global-error-handler';
 import { DefaultInterceptor } from './core/interceptor/default.interceptor';
@@ -27,8 +27,8 @@ import { SharedPipeModule } from './shared/shared-pipe.module';
     AppRoutingModule,
     HttpClientModule,
     // app
-    AngularCdkModule,
-    AngularMaterialModule,
+    SharedAngularCdkModule,
+    SharedAngularMaterialModule,
     // shared
     SharedPipeModule,
     SharedComponentModule,

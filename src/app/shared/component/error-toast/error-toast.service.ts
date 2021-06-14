@@ -2,11 +2,10 @@ import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { PathLocationStrategy } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ComponentRef, Injectable, InjectionToken, Injector, NgZone } from '@angular/core';
+import { ComponentRef, Injectable, Injector, NgZone } from '@angular/core';
 import * as StackTrace from 'stacktrace-js';
+import { ERROR_TOAST_TOKEN } from './error-toast-token';
 import { ErrorToastComponent } from './error-toast.component';
-
-export const ERROR_TOAST_DATA = new InjectionToken<{}>('ERROR_TOAST_DATA');
 
 @Injectable()
 export class ErrorToastService {
@@ -83,7 +82,7 @@ export class ErrorToastService {
             parent: this.injector,
             providers: [
               {
-                provide: ERROR_TOAST_DATA,
+                provide: ERROR_TOAST_TOKEN,
                 useValue: { message, stack }
               }
             ]

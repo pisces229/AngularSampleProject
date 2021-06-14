@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // app
-import { AngularCdkModule } from 'src/app/angular-cdk.module';
-import { AngularMaterialModule } from 'src/app/angular-material.module';
+import { SharedAngularCdkModule } from 'src/app/shared-angular-cdk.module';
+import { SharedAngularMaterialModule } from 'src/app/shared-angular-material.module';
 // shared
 import { SharedPipeModule } from 'src/app/shared/shared-pipe.module';
 import { SharedComponentModule } from 'src/app/shared/shared-component.module';
@@ -27,8 +27,8 @@ import { Test02Service } from './test02/test02.service';
     FormsModule,
     TestRoutingModule,
     // app
-    AngularCdkModule,
-    AngularMaterialModule,
+    SharedAngularCdkModule,
+    SharedAngularMaterialModule,
     // shared
     SharedPipeModule,
     SharedComponentModule

@@ -1,9 +1,8 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable, InjectionToken, Injector, NgZone } from '@angular/core';
+import { ComponentRef, Injectable, Injector, NgZone } from '@angular/core';
+import { BLOCK_TOAST_TOKEN } from './block-toast-token';
 import { BlockToastComponent } from './block-toast.component';
-
-export const BLOCK_TOAST_DATA = new InjectionToken<{}>('BLOCK_TOAST_DATA');
 
 @Injectable()
 export class BlockToastService {
@@ -44,7 +43,7 @@ export class BlockToastService {
           parent: this.injector,
           providers: [
             {
-              provide: BLOCK_TOAST_DATA,
+              provide: BLOCK_TOAST_TOKEN,
               useValue: { message: 'Loading...' }
             }
           ]

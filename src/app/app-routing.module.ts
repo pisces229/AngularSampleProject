@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AppRoutingPath } from './app-routing-path';
 
 import { DefaultGuard } from './core/guard/default.guard';
 
 const routes: Routes = [
   {
-    path: 'test',
+    path: AppRoutingPath.Test,
     canActivate: [DefaultGuard],
     canActivateChild: [DefaultGuard],
     canDeactivate: [DefaultGuard],
     canLoad: [DefaultGuard],
     loadChildren: () => import('./page/test/test.module').then(m => m.TestModule)
   },
-  {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full'
-  }
+  // {
+  //   path: '**',
+  //   redirectTo: '',
+  //   pathMatch: 'full'
+  // }
 ];
 
 @NgModule({
