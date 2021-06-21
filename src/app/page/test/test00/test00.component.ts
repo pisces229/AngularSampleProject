@@ -26,9 +26,8 @@ import { Test00StoreService } from './test00-store.service';
 })
 export class Test00Component implements OnInit {
 
-
   uploadFiles!: FileList;
-  rowString!: string;
+  rowString?: string;
 
   @ViewChild('viewChildElementHeader') viewChildElementHeader!: ElementRef<any>;
 
@@ -87,9 +86,10 @@ export class Test00Component implements OnInit {
   }
 
   onClickGetValueByModel(): void {
-    let postData = new Test00AjaxValueInputModel();
-    postData.Name = "Name123";
-    postData.Count = 123;
+    let postData: Test00AjaxValueInputModel = {
+      Name: "Name123",
+      Count: 123
+    };
     //postData.Date = new Date();
     this.blockToastService.start();
     this.test00Service.getValueByModel(postData)
@@ -107,10 +107,11 @@ export class Test00Component implements OnInit {
   }
 
   onClickPostValueByModel(): void {
-    let postData = new Test00AjaxValueInputModel();
-    postData.Name = "Name123";
-    postData.Count = 123;
-    postData.Date = new Date();
+    let postData: Test00AjaxValueInputModel = {
+      Name: "Name123",
+      Count: 123,
+      Date: new Date()
+    };
     this.blockToastService.start();
     this.test00Service.postValueByModel(postData)
     .pipe(finalize(() => this.blockToastService.stop()))
@@ -194,15 +195,17 @@ export class Test00Component implements OnInit {
 
   onClickQuery(): void {
     this.blockToastService.start();
-    let postData = new Test00AjaxQueryInputModel();
+    let postData: Test00AjaxQueryInputModel = {};
     this.test00Service.queryWhere(postData)
     .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
-        if (value.Data.length > 0) {
-          this.rowString = value.Data[0].ROW;
+        if (value) {
+          if (value.Data && value.Data.length > 0) {
+            this.rowString = value.Data[0].ROW;
+          }
+          console.log(value);
         }
-        console.log(value);
       },
       error => {
         // error do something
@@ -213,10 +216,11 @@ export class Test00Component implements OnInit {
   }
 
   onClickInsert(): void {
-    let postData = new Test00AjaxInsertInputModel();
-    postData.NAME = "C";
-    postData.MAKE_DATE = new Date();
-    postData.SALE_AMT = -100;
+    let postData: Test00AjaxInsertInputModel = {
+      NAME: "C",
+      MAKE_DATE: new Date(),
+      SALE_AMT: -100
+    };
     this.blockToastService.start();
     this.test00Service.insert(postData)
     .pipe(finalize(() => this.blockToastService.stop()))
@@ -233,14 +237,14 @@ export class Test00Component implements OnInit {
   }
 
   onClickUpdate(): void {
-    let postData = new Test00AjaxUpdateInputModel();
-    postData.ROW = this.rowString;
-    postData.NAME = "AA";
-    postData.MAKE_DATE = new Date();
-    postData.SALE_AMT = -1000;
-    postData.SALE_DATE = new Date();
-    postData.TAX = 999;
-    postData.REMARK = "REMARK";
+    let postData: Test00AjaxUpdateInputModel = {
+      ROW: this.rowString,
+      NAME: "AA",
+      MAKE_DATE: new Date(),
+      SALE_AMT: -1000,
+      SALE_DATE: new Date(),
+      REMARK: "REMARK"
+    };
     this.blockToastService.start();
     this.test00Service.update(postData)
     .pipe(finalize(() => this.blockToastService.stop()))
@@ -276,11 +280,15 @@ export class Test00Component implements OnInit {
 
   onClickQueryGrid(): void {
     this.blockToastService.start();
-    let postData = new CommonAjaxPageModel<Test00AjaxQueryInputModel>();
-    postData.Data = new Test00AjaxQueryInputModel();
-    postData.Page = new CommonPageModel();
-    postData.Page.PageNo = 2;
-    postData.Page.PageSize = 10;
+    let postData: CommonAjaxPageModel<Test00AjaxQueryInputModel> = {
+      Data: {
+
+      },
+      Page: {
+        PageNo: 2,
+        PageSize: 10
+      }
+    };
     this.test00Service.queryGrid(postData)
     .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(

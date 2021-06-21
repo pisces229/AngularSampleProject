@@ -1,5 +1,5 @@
 
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -21,10 +21,10 @@ import { SharedPipeModule } from './shared/shared-pipe.module';
     AppComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    AppRoutingModule,
     HttpClientModule,
     // app
     SharedAngularCdkModule,

@@ -11,8 +11,8 @@ import {
 })
 export class Test01StoreService implements DefaultStroeService {
 
-  private test01Model!: Test01Model | null;
-  private test01FormModel!: Test01FormModel | null;
+  private test01Model?: Test01Model;
+  private test01FormModel?: Test01FormModel;
 
   constructor() {
     console.log('Test01StoreService');
@@ -25,8 +25,8 @@ export class Test01StoreService implements DefaultStroeService {
   getTest01FormModel = (): Test01FormModel => this.test01FormModel!;
 
   clear(): void {
-    this.test01Model = null;
-    this.test01FormModel = null;
+    this.test01Model = undefined;
+    this.test01FormModel = undefined;
   }
 
 }

@@ -20,8 +20,10 @@ import { Test01StoreService } from './test01-store.service';
 })
 export class Test01Component implements OnInit {
 
-  test01Model = new Test01Model();
-  test01FormModel = new Test01FormModel();
+  test01Model: Test01Model = {
+    Count: 0
+  };
+  test01FormModel: Test01FormModel = {};
 
   //behavior = new BehaviorSubject<string>('');
 
@@ -61,7 +63,7 @@ export class Test01Component implements OnInit {
   go(): void {
     // keep state
     this.test01StoreService.setTest01Model(this.test01Model);
-    this.test01FormModel.Age = null;
+    this.test01FormModel.Age = undefined;
     this.test01StoreService.setTest01FormModel(this.test01FormModel);
     // post data
     let routeUrl = this.routeDataService.url(AppRoutingPath.Test, TestRoutingPath.Test02);

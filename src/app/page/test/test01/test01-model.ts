@@ -1,7 +1,7 @@
-export class Test01Model {
-  Count: number = 0;
+export interface Test01Model {
+  Count: number;
 }
-export class Test01FormModel {
-  Name!: string | null;
-  Age!: number | null;
+export interface Test01FormModel {
+  Name?: string;
+  Age?: number;
 }

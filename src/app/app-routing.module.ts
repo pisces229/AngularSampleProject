@@ -13,11 +13,11 @@ const routes: Routes = [
     canLoad: [DefaultGuard],
     loadChildren: () => import('./page/test/test.module').then(m => m.TestModule)
   },
-  // {
-  //   path: '**',
-  //   redirectTo: '',
-  //   pathMatch: 'full'
-  // }
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

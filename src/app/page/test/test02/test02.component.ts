@@ -19,8 +19,10 @@ import {
 })
 export class Test02Component implements OnInit {
 
-  test02Model = new Test02Model();
-  test02FormModel = new Test02FormModel();
+  test02Model: Test02Model = {
+    Count: 0
+  };
+  test02FormModel: Test02FormModel = {};
 
   constructor(private router: Router,
     private routeDataService: RouteDataService,
@@ -58,7 +60,7 @@ export class Test02Component implements OnInit {
   go(): void {
     // keep state
     this.test02StoreService.setTest02Model(this.test02Model);
-    this.test02FormModel.Age = null;
+    this.test02FormModel.Age = undefined;
     this.test02StoreService.setTest02FormModel(this.test02FormModel);
     // post data
     let routeUrl = this.routeDataService.url(AppRoutingPath.Test, TestRoutingPath.Test01);
