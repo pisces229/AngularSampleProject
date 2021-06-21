@@ -33,9 +33,9 @@
             [child].component.ts
             [child].component.html
             [child].component.scss
-            [child]-model.ts
-            [child].service.ts 
-            [child]-store.service.ts 
+        [parent]-model.ts
+        [parent].service.ts 
+        [parent]-store.service.ts 
         [parent]-routing-path.ts
         [parent]-routing.module.ts
         [parent].module.ts
