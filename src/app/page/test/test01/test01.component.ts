@@ -77,9 +77,15 @@ export class Test01Component implements OnInit {
 
   go(): void {
     // keep state
+<<<<<<< HEAD
     this.testStoreService.setTest01Model(this.test01Model);
     this.test01FormModel.Age = undefined;
     this.testStoreService.setTest01FormModel(this.test01FormModel);
+=======
+    this.test01StoreService.setTest01Model(this.test01Model);
+    this.test01FormModel.Age = undefined;
+    this.test01StoreService.setTest01FormModel(this.test01FormModel);
+>>>>>>> e2ea3dd3045eb3c838d782d40425a38fd15bccc8
     // post data
     let routeUrl = this.routeDataService.url(AppRoutingPath.Test, TestRoutingPath.Test02);
     this.routeDataService.set(routeUrl, 'Keep', { routeUrl });

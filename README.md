@@ -25,7 +25,7 @@
         [name].service.ts
     store (狀態管理)
         [name]-store.service.ts
-    shared-componnet.module.ts
+    shared-component.module.ts
     shared-pipe.module.ts
 ### page (頁面)
     [parent] (頁面模組)

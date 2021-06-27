@@ -4,19 +4,6 @@
 
 export const environment = {
   production: false,
-
-
-
-
-
-
-
-
-
-
-
-
-
   defaultEndpoint: 'http://localhost:16514',
   //defaultEndpoint: 'http://localhost:4200',
 };

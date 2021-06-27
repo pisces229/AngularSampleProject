@@ -24,6 +24,7 @@ export class Test02Component implements OnInit {
     Count: 0
   };
   test02FormModel: Test02FormModel = {};
+<<<<<<< HEAD
 
   options = [
     { value: '', text: 'Please Select One' },
@@ -34,6 +35,8 @@ export class Test02Component implements OnInit {
 
   buttonPlusMode: CommonModeModel = { Enable: true, Hidden: false };
   buttonMinusMode: CommonModeModel = { Enable: true, Hidden: false };
+=======
+>>>>>>> e2ea3dd3045eb3c838d782d40425a38fd15bccc8
 
   constructor(private router: Router,
     private routeDataService: RouteDataService,
@@ -76,9 +79,15 @@ export class Test02Component implements OnInit {
 
   go(): void {
     // keep state
+<<<<<<< HEAD
     this.testStoreService.setTest02Model(this.test02Model);
     this.test02FormModel.Age = undefined;
     this.testStoreService.setTest02FormModel(this.test02FormModel);
+=======
+    this.test02StoreService.setTest02Model(this.test02Model);
+    this.test02FormModel.Age = undefined;
+    this.test02StoreService.setTest02FormModel(this.test02FormModel);
+>>>>>>> e2ea3dd3045eb3c838d782d40425a38fd15bccc8
     // post data
     let routeUrl = this.routeDataService.url(AppRoutingPath.Test, TestRoutingPath.Test01);
     this.routeDataService.set(routeUrl, 'Keep', { routeUrl });
