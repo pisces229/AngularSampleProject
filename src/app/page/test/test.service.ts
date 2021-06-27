@@ -13,21 +13,20 @@ import { EndpointService } from 'src/app/shared/service/endpoint.service';
 import { AuthTokenStoreService } from 'src/app/shared/store/auth-token-store.service';
 // page
 import {
-  Test00AjaxQueryOutputModel,
-  Test00AjaxInsertInputModel,
-  Test00AjaxUpdateInputModel,
-  Test00AjaxValueInputModel,
-  Test00AjaxValueOutputModel,
-  Test00AjaxQueryInputModel
-} from './test00-model';
+  TestAjaxQueryOutputModel,
+  TestAjaxInsertInputModel,
+  TestAjaxUpdateInputModel,
+  TestAjaxValueInputModel,
+  TestAjaxValueOutputModel,
+  TestAjaxQueryInputModel
+} from './test-model';
 
 @Injectable()
-export class Test00Service {
+export class TestService {
 
   constructor(private httpClient: HttpClient,
     private authTokenStoreService: AuthTokenStoreService,
     private endpointService: EndpointService) {
-    console.log('Test00Service');
   }
 
   getValueByValue(value: string): Observable<string> {
@@ -48,16 +47,16 @@ export class Test00Service {
       });
   }
 
-  getValueByModel(postData: Test00AjaxValueInputModel): Observable<Test00AjaxValueOutputModel> {
+  getValueByModel(postData: TestAjaxValueInputModel): Observable<TestAjaxValueOutputModel> {
     let httpParams = new HttpParams();
     for (let [key, value] of Object.entries(postData)) {
       httpParams = httpParams.set(key, value);
     }
-    return this.httpClient.get<Test00AjaxValueOutputModel>(this.endpointService.defaultUrl('Test/getValueByModel'), { params: httpParams });
+    return this.httpClient.get<TestAjaxValueOutputModel>(this.endpointService.defaultUrl('Test/getValueByModel'), { params: httpParams });
   }
 
-  postValueByModel(postData: Test00AjaxValueInputModel): Observable<Test00AjaxValueOutputModel> {
-    return this.httpClient.post<Test00AjaxValueOutputModel>(this.endpointService.defaultUrl('Test/PostValueByModel'), postData);
+  postValueByModel(postData: TestAjaxValueInputModel): Observable<TestAjaxValueOutputModel> {
+    return this.httpClient.post<TestAjaxValueOutputModel>(this.endpointService.defaultUrl('Test/PostValueByModel'), postData);
   }
 
   signIn(): Observable<boolean> {
@@ -108,16 +107,16 @@ export class Test00Service {
     return of(true);
   }
 
-  queryWhere(postData: Test00AjaxQueryInputModel): Observable<CommonAjaxOutputModel<Test00AjaxQueryOutputModel[]>> {
+  queryWhere(postData: TestAjaxQueryInputModel): Observable<CommonAjaxOutputModel<TestAjaxQueryOutputModel[]>> {
     return this.httpClient
-      .get<CommonAjaxOutputModel<Test00AjaxQueryOutputModel[]>>(this.endpointService.defaultUrl('Test/QueryWhere'));
+      .get<CommonAjaxOutputModel<TestAjaxQueryOutputModel[]>>(this.endpointService.defaultUrl('Test/QueryWhere'));
   }
 
-  insert(postData: Test00AjaxInsertInputModel): Observable<CommonAjaxOutputModel<string>> {
+  insert(postData: TestAjaxInsertInputModel): Observable<CommonAjaxOutputModel<string>> {
     return this.httpClient
       .post<CommonAjaxOutputModel<string>>(this.endpointService.defaultUrl('Test/Insert'), postData);
   }
-  update(postData: Test00AjaxUpdateInputModel): Observable<CommonAjaxOutputModel<string>> {
+  update(postData: TestAjaxUpdateInputModel): Observable<CommonAjaxOutputModel<string>> {
     return this.httpClient
       .post<CommonAjaxOutputModel<string>>(this.endpointService.defaultUrl('Test/Update'), postData);
   }
@@ -132,9 +131,9 @@ export class Test00Service {
       });
   }
 
-  queryGrid(postData: CommonAjaxPageModel<Test00AjaxQueryInputModel>): Observable<CommonAjaxOutputModel<CommonAjaxPageModel<Test00AjaxQueryOutputModel>>> {
+  queryGrid(postData: CommonAjaxPageModel<TestAjaxQueryInputModel>): Observable<CommonAjaxOutputModel<CommonAjaxPageModel<TestAjaxQueryOutputModel>>> {
     return this.httpClient
-      .post<CommonAjaxOutputModel<CommonAjaxPageModel<Test00AjaxQueryOutputModel>>>(this.endpointService.defaultUrl('Test/QueryGrid'), postData);
+      .post<CommonAjaxOutputModel<CommonAjaxPageModel<TestAjaxQueryOutputModel>>>(this.endpointService.defaultUrl('Test/QueryGrid'), postData);
   }
 
   upload(postData: FormData): Observable<CommonAjaxOutputModel<string>> {

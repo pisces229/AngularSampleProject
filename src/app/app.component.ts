@@ -7,14 +7,6 @@ import { HttpInterceptorHandler } from './core/handler/http-interceptor-handler'
 import { BlockToastService } from './shared/component/block-toast/block-toast.service';
 import { ErrorToastService } from './shared/component/error-toast/error-toast.service';
 import { EndpointService } from './shared/service/endpoint.service';
-// Service
-import { Test00Service } from './page/test/test00/test00.service';
-import { Test01Service } from './page/test/test01/test01.service';
-import { Test02Service } from './page/test/test02/test02.service';
-// StoreService
-import { Test01StoreService } from './page/test/test01/test01-store.service';
-import { Test00StoreService } from './page/test/test00/test00-store.service';
-import { Test02StoreService } from './page/test/test02/test02-store.service';
 
 @Component({
   selector: 'app-root',
@@ -32,16 +24,8 @@ export class AppComponent {
     private httpClient: HttpClient,
     private httpBackend: HttpBackend,
     private endpointService: EndpointService) {
-      injector.get(BlockToastService);
-      injector.get(ErrorToastService);
-
-      // injector.get(Test00Service);
-      // injector.get(Test01Service);
-      // injector.get(Test02Service);
-      injector.get(Test00StoreService);
-      injector.get(Test01StoreService);
-      injector.get(Test02StoreService);
-
+    injector.get(BlockToastService);
+    injector.get(ErrorToastService);
     // {
     //   httpClient.get(endpointUtilService.defaultUrl('assets/test.json')).subscribe(value => console.log(value));
     // }

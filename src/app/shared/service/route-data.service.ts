@@ -5,30 +5,32 @@ import { Injectable } from '@angular/core';
 })
 export class RouteDataService {
 
-  private _url: string = '';
-  private _data: any | null;
+  private routeUrl?: string;
+  private routeAction?: string;
+  private routeData?: any;
 
   constructor() { }
 
   url = (...values: string[]): string => values.join("/");
 
-  exists(url: string): boolean {
-    if (this._url == url && this._data != null) {
-      return true;
+  action(url: string): string | null {
+    if (this.routeUrl == url) {
+      return this.routeAction!;
     } else {
       this.clear();
-      return false;
+      return null;
     }
   }
 
-  set(url: string, data: any): void {
-    this._url = url;
-    this._data = data;
+  set(url: string, action: string, data: any): void {
+    this.routeUrl = url;
+    this.routeAction = action;
+    this.routeData = data;
   }
 
   get<T>(url: string): T | null {
-    if (this._url == url && this._data != null) {
-      const result = Object.assign({}, this._data);
+    if (this.routeUrl == url) {
+      const result = Object.assign({}, this.routeData);
       this.clear();
       return (result as T);
     } else {
@@ -37,8 +39,10 @@ export class RouteDataService {
   }
 
   private clear(): void {
-    this._url = '';
-    this._data = null;
+    this.routeUrl = undefined;
+    this.routeAction = undefined;
+    this.routeData = undefined;
   }
 
 }
+

@@ -35,7 +35,12 @@
             ],
             "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "input": "src/scss/global.scss",
+                "bundleName": "global",
+                "inject": false
+              }
             ],
             "scripts": []
           },

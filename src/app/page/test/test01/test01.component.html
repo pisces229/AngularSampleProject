@@ -1,5 +1,4 @@
 <p class="import-assets-css test-scss">test01 works!</p>
-<label>NumberFormatPipe:{{ '123456789' | numberFormat }}</label>
 <div class="container">
   <div class="row form-group">
     <div class="col">
@@ -19,10 +18,24 @@
       <button (click)="plus()">+</button>
     </div>
     <div class="col">
-      <button (click)="minus()">-</button>
+      <button *ngIf="!buttonMinusMode.Hidden" [disabled]="!buttonMinusMode.Enable" (click)="minus()">-</button>
     </div>
     <div class="col">
       <button (click)="go()">Go</button>
     </div>
   </div>
 </div>
+<hr>
+<select class="pdn-page-select" >
+  <option *ngFor="let item of options; let index = index">{{item.text}}</option>
+</select>
+<hr>
+<ng-container *ngFor="let item of options; let index = index">
+  <ng-container *ngIf="index == 2">
+    {{item | json}}
+  </ng-container>
+</ng-container>
+<hr>
+<label>NumberFormatPipe:{{ '123456789' | numberFormat }}</label>
+<hr>
+<label>buttonMinusMode:{{ 'buttonMinusMode' | json }}</label>

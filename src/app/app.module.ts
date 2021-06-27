@@ -1,5 +1,6 @@
 
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -7,22 +8,28 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedAngularCdkModule } from './shared-angular-cdk.module';
-import { SharedAngularMaterialModule } from './shared-angular-material.module';
 // core
 import { GlobalErrorHandler } from './core/handler/global-error-handler';
 import { DefaultInterceptor } from './core/interceptor/default.interceptor';
 // shared
+import { SharedAngularCdkModule } from './shared/shared-angular-cdk.module';
+import { SharedAngularMaterialModule } from './shared/shared-angular-material.module';
 import { SharedComponentModule } from './shared/shared-component.module';
 import { SharedPipeModule } from './shared/shared-pipe.module';
+// page
+import { LoginComponent } from './page/login/login.component';
+import { HomeComponent } from './page/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    CommonModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,

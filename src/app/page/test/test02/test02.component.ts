@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { CommonModeModel } from 'src/app/shared/model/commond-model';
 import { BlockToastService } from 'src/app/shared/component/block-toast/block-toast.service';
 import { RouteDataService } from 'src/app/shared/service/route-data.service';
 import { AppRoutingPath } from 'src/app/app-routing-path';
 import { TestRoutingPath } from '../test-routing-path';
-import { Test02Service } from './test02.service';
-import { Test02StoreService } from './test02-store.service';
 import {
   Test02Model,
   Test02FormModel
-} from './test02-model';
+} from './../test-model';
+import { TestService } from './../test.service';
+import { TestStoreService } from './../test-store.service';
 
 @Component({
   selector: 'app-test02',
@@ -19,22 +20,40 @@ import {
 })
 export class Test02Component implements OnInit {
 
-  test02Model = new Test02Model();
-  test02FormModel = new Test02FormModel();
+  test02Model: Test02Model = {
+    Count: 0
+  };
+  test02FormModel: Test02FormModel = {};
+
+  options = [
+    { value: '', text: 'Please Select One' },
+    { value: '1', text: 'AAAAA' },
+    { value: '2', text: 'BBBBB' },
+    { value: '3', text: 'CCCCC' },
+  ];
+
+  buttonPlusMode: CommonModeModel = { Enable: true, Hidden: false };
+  buttonMinusMode: CommonModeModel = { Enable: true, Hidden: false };
 
   constructor(private router: Router,
     private routeDataService: RouteDataService,
-    private test02Service: Test02Service,
-    private test02StoreService: Test02StoreService,
+    private testService: TestService,
+    private testStoreService: TestStoreService,
     private blockToastService: BlockToastService) {
-      let routeUrl = this.routeDataService.url(AppRoutingPath.Test, TestRoutingPath.Test02);
-      console.log('routeDataService', routeDataService.get<any>(routeUrl));
-      if (test02StoreService.getTest02Model()) {
-        this.test02Model = this.test02StoreService.getTest02Model();
+    let routeUrl = this.routeDataService.url(AppRoutingPath.Test, TestRoutingPath.Test02);
+    switch (routeDataService.action(routeUrl)) {
+      case 'Keep': {
+        if (testStoreService.getTest02Model()) {
+          this.test02Model = this.testStoreService.getTest02Model();
+        }
+        if (testStoreService.getTest02FormModel()) {
+          this.test02FormModel = this.testStoreService.getTest02FormModel();
+        }
+        break;
       }
-      if (test02StoreService.getTest02FormModel()) {
-        this.test02FormModel = this.test02StoreService.getTest02FormModel();
-      }
+    }
+    //this.buttonMinusMode.Enable = false;
+    this.buttonMinusMode.Hidden = true;
   }
 
   ngOnInit(): void {
@@ -57,12 +76,12 @@ export class Test02Component implements OnInit {
 
   go(): void {
     // keep state
-    this.test02StoreService.setTest02Model(this.test02Model);
-    this.test02FormModel.Age = null;
-    this.test02StoreService.setTest02FormModel(this.test02FormModel);
+    this.testStoreService.setTest02Model(this.test02Model);
+    this.test02FormModel.Age = undefined;
+    this.testStoreService.setTest02FormModel(this.test02FormModel);
     // post data
     let routeUrl = this.routeDataService.url(AppRoutingPath.Test, TestRoutingPath.Test01);
-    this.routeDataService.set(routeUrl, { routeUrl });
+    this.routeDataService.set(routeUrl, 'Keep', { routeUrl });
     this.router.navigate([routeUrl]);
   }
 
