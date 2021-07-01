@@ -1,9 +1,6 @@
 
 import { NgModule, ErrorHandler } from '@angular/core';
-<<<<<<< HEAD
 import { CommonModule } from '@angular/common';
-=======
->>>>>>> e2ea3dd3045eb3c838d782d40425a38fd15bccc8
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
