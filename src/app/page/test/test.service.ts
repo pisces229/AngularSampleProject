@@ -8,7 +8,7 @@ import { catchError, mapTo, tap } from 'rxjs/operators';
 import {
   CommonAjaxOutputModel,
   CommonAjaxPageModel
-} from 'src/app/shared/model/commond-model';
+} from 'src/app/shared/model/common-model';
 import { EndpointService } from 'src/app/shared/service/endpoint.service';
 import { AuthTokenStoreService } from 'src/app/shared/store/auth-token-store.service';
 // page
