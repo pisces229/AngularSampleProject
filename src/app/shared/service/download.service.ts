@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { saveAs } from 'file-saver';
 
@@ -9,9 +9,15 @@ export class DownloadService {
 
   constructor() { }
 
+  message(response: HttpResponse<Blob>): Promise<any> {
+    if (response.body?.type == 'text/plain') {
+      return response.body?.text().then(value => value);
+    } else {
+      return new Promise((resolve, reject) => resolve(''));
+    }
+  }
+
   create(response: HttpResponse<Blob>): void {
-    // console.log(response);
-    // console.log(response.headers.keys());
     let contentDisposition = response.headers.get('content-disposition');
     let contentDispositionValues = contentDisposition?.split(';');
     let filename = 'download';
@@ -31,15 +37,6 @@ export class DownloadService {
     // a.click();
     // document.body.removeChild(a);
     saveAs((response.body as Blob), filename);
-  }
-
-  error(error: any): void {
-    if (error instanceof HttpErrorResponse) {
-      error.error.text()
-      .then((value: any) => {
-        console.log(value);
-      });
-    }
   }
 
 }

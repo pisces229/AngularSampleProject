@@ -364,11 +364,16 @@ export class Test00Component implements OnInit {
     .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
-        this.downloadService.create(value);
+        this.downloadService.message(value).then(message => {
+          if (message) {
+            console.log(message);
+          } else {
+            this.downloadService.create(value);
+          }
+        });
       },
       error => {
         // error do something
-        this.downloadService.error(error);
       },
       () => {
         // complete do something
@@ -382,11 +387,16 @@ export class Test00Component implements OnInit {
     .pipe(finalize(() => this.blockToastService.stop()))
     .subscribe(
       value => {
-        this.downloadService.create(value);
+        this.downloadService.message(value).then(message => {
+          if (message) {
+            console.log(message);
+          } else {
+            this.downloadService.create(value);
+          }
+        });
       },
       error => {
         // error do something
-        this.downloadService.error(error);
       },
       () => {
         // complete do something
