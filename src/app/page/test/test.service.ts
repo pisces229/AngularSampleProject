@@ -2,7 +2,7 @@
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, mapTo, tap } from 'rxjs/operators';
+import { catchError, finalize, mapTo, tap } from 'rxjs/operators';
 
 // shared
 import {
@@ -62,7 +62,7 @@ export class TestService {
   signIn(): Observable<boolean> {
     let postData = { Username: "Username", Password: "Password" };
     return this.httpClient
-      .post(this.endpointService.defaultUrl('Test/SignIn'), postData, { responseType: 'text'})
+      .post(this.endpointService.defaultUrl('Login/SignIn'), postData, { responseType: 'text'})
       .pipe(
         tap(value => {
           this.authTokenStoreService.setAuthToken(value);
@@ -76,7 +76,7 @@ export class TestService {
   Refresh(): Observable<boolean> {
     let postData = JSON.stringify(this.authTokenStoreService.getAuthToken());
     return this.httpClient
-      .post(this.endpointService.defaultUrl('Test/Refresh'), postData,
+      .post(this.endpointService.defaultUrl('Login/Refresh'), postData,
         {
           headers: new HttpHeaders({
             'Content-Type': 'text/json'
@@ -92,19 +92,19 @@ export class TestService {
         }));
   }
 
-  validateAuth(): Observable<any> {
-    return this.httpClient
-      .get(this.endpointService.defaultUrl('Test/ValidateAuth'), { responseType: 'text'})
-      .pipe(
-        mapTo(true),
-        catchError(error => {
-          return of(false);
-        }));
-  }
-
   signOut(): Observable<boolean> {
-    this.authTokenStoreService.clear();
-    return of(true);
+    let postData = JSON.stringify(this.authTokenStoreService.getAuthToken());
+    return this.httpClient
+      .post(this.endpointService.defaultUrl('Login/signOut'), postData,
+        {
+          headers: new HttpHeaders({
+            'Content-Type': 'text/json'
+          }),
+          responseType: 'text'
+        })
+      .pipe(
+        finalize(() => this.authTokenStoreService.clear()),
+        mapTo(true));
   }
 
   queryWhere(postData: TestAjaxQueryInputModel): Observable<CommonAjaxOutputModel<TestAjaxQueryOutputModel[]>> {

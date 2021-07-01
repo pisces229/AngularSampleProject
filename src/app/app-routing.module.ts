@@ -26,11 +26,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-<<<<<<< HEAD
     redirectTo: AppRoutingPath.Login,
-=======
-    redirectTo: '',
->>>>>>> e2ea3dd3045eb3c838d782d40425a38fd15bccc8
     pathMatch: 'full'
   }
 ];

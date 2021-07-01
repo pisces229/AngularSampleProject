@@ -24,7 +24,7 @@ import { HomeComponent } from './page/home/home.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     AppRoutingModule,

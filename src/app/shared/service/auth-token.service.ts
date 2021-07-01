@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { EMPTY, Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 // core
 import { AuthTokenStoreService } from '../../shared/store/auth-token-store.service';
 import { EndpointService } from './endpoint.service';
@@ -12,25 +13,33 @@ import { EndpointService } from './endpoint.service';
 export class AuthTokenService {
 
   constructor(private httpClient: HttpClient,
+    private httpBackend: HttpBackend,
+    private router: Router,
     private authTokenStoreService: AuthTokenStoreService,
     private endpointService: EndpointService) { }
 
   refresh(): Observable<string> {
-    console.log('refresh');
     if (this.authTokenStoreService.getAuthToken()) {
-      return this.httpClient
-        .post(this.endpointService.defaultUrl('Test/Refresh'), JSON.stringify(this.authTokenStoreService.getAuthToken()),
-          {
-            headers: new HttpHeaders({
-              'Content-Type': 'text/json'
-            }),
-            responseType: 'text'
-          })
-        .pipe(
-          tap((value: string) => this.authTokenStoreService.setAuthToken(value)));
+      let httpClient = new HttpClient(this.httpBackend);
+      return httpClient
+      .post(this.endpointService.defaultUrl('Test/Refresh'), JSON.stringify(this.authTokenStoreService.getAuthToken()),
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'text/json'
+        }),
+        responseType: 'text'
+      })
+      .pipe(
+        tap((value: string) => this.authTokenStoreService.setAuthToken(value)),
+        catchError(() => {
+          this.authTokenStoreService.clear();
+          this.router.navigate(['']);
+          return EMPTY;
+        })
+      );
     } else {
-      console.log('refresh fail');
-      return throwError('refresh fail');
+      this.router.navigate(['']);
+      return EMPTY;
     }
   }
 

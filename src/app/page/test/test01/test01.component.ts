@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { CommonModeModel } from 'src/app/shared/model/commond-model';
+import { CommonModeModel } from 'src/app/shared/model/common-model';
 import { BlockToastService } from 'src/app/shared/component/block-toast/block-toast.service';
 import { RouteDataService } from 'src/app/shared/service/route-data.service';
+import { CommonComponent } from 'src/app/shared/component/common/common.component';
 import { AppRoutingPath } from 'src/app/app-routing-path';
 import { TestRoutingPath } from '../test-routing-path';
 import {
@@ -12,7 +13,6 @@ import {
 } from './../test-model';
 import { TestService } from './../test.service';
 import { TestStoreService } from './../test-store.service';
-
 
 @Component({
   selector: 'app-test01',
@@ -35,6 +35,8 @@ export class Test01Component implements OnInit {
 
   buttonPlusMode: CommonModeModel = { Enable: true, Hidden: false };
   buttonMinusMode: CommonModeModel = { Enable: true, Hidden: false };
+
+  @ViewChild('viewChildCommonComponent') viewChildCommonComponent!: CommonComponent;
 
   constructor(private router: Router,
     private routeDataService: RouteDataService,
@@ -77,15 +79,9 @@ export class Test01Component implements OnInit {
 
   go(): void {
     // keep state
-<<<<<<< HEAD
     this.testStoreService.setTest01Model(this.test01Model);
     this.test01FormModel.Age = undefined;
     this.testStoreService.setTest01FormModel(this.test01FormModel);
-=======
-    this.test01StoreService.setTest01Model(this.test01Model);
-    this.test01FormModel.Age = undefined;
-    this.test01StoreService.setTest01FormModel(this.test01FormModel);
->>>>>>> e2ea3dd3045eb3c838d782d40425a38fd15bccc8
     // post data
     let routeUrl = this.routeDataService.url(AppRoutingPath.Test, TestRoutingPath.Test02);
     this.routeDataService.set(routeUrl, 'Keep', { routeUrl });
@@ -95,6 +91,10 @@ export class Test01Component implements OnInit {
   onChangeFormName(event: Event): void {
     const htmlInputElement = (event.target as HTMLInputElement);
     console.log(htmlInputElement.value);
+  }
+
+  show(): void {
+    this.viewChildCommonComponent.show();
   }
 
 }

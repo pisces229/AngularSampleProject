@@ -6,6 +6,7 @@ import { SharedAngularCdkModule } from 'src/app/shared/shared-angular-cdk.module
 import { SharedAngularMaterialModule } from 'src/app/shared/shared-angular-material.module';
 import { SharedPipeModule } from 'src/app/shared/shared-pipe.module';
 import { SharedComponentModule } from 'src/app/shared/shared-component.module';
+import { CommonComponent } from 'src/app/shared/component/common/common.component';
 // page
 import { TestRoutingModule } from './test-routing.module';
 import { TestService } from './test.service';
@@ -17,7 +18,8 @@ import { Test02Component } from './test02/test02.component';
   declarations: [
     Test00Component,
     Test01Component,
-    Test02Component
+    Test02Component,
+    CommonComponent
   ],
   imports: [
     CommonModule,
