@@ -1,0 +1,5 @@
+$global-font-family: "Microsoft JhengHei", "微軟正黑體", 'Roboto-Light', 'Arial', sans-serif;
+
+@mixin global-font {
+  font-family: $global-font-family;
+}

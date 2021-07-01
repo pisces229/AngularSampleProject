@@ -1,4 +1,6 @@
 
 export enum AppRoutingPath {
-  Test = "test"
+  Login = "login",
+  Home = "home",
+  Test = "test",
 }

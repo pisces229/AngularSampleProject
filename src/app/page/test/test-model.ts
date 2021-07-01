@@ -1,4 +1,20 @@
-export interface Test00AjaxInsertInputModel {
+// Component
+export interface Test01Model {
+  Count: number;
+}
+export interface Test01FormModel {
+  Name?: string;
+  Age?: number;
+}
+export interface Test02Model {
+  Count: number;
+}
+export interface Test02FormModel {
+  Name?: string;
+  Age?: number;
+}
+// Ajax
+export interface TestAjaxInsertInputModel {
   ROW?: string;
   NAME?: string;
   MAKE_DATE?: Date;
@@ -10,13 +26,13 @@ export interface Test00AjaxInsertInputModel {
   UPDATE_PROG_CD?: string;
   UPDATE_DATE_TIME?: Date;
 }
-export interface Test00AjaxQueryInputModel {
+export interface TestAjaxQueryInputModel {
   NAME?: string;
   MAKE_DATE?: Date;
   SALE_AMT?: number;
   SALE_DATE?: Date;
 }
-export interface Test00AjaxQueryOutputModel {
+export interface TestAjaxQueryOutputModel {
   ROW?: string;
   NAME?: string;
   MAKE_DATE?: Date;
@@ -28,7 +44,7 @@ export interface Test00AjaxQueryOutputModel {
   UPDATE_PROG_CD?: string;
   UPDATE_DATE_TIME?: Date;
 }
-export interface Test00AjaxUpdateInputModel {
+export interface TestAjaxUpdateInputModel {
   ROW?: string;
   NAME?: string;
   MAKE_DATE?: Date;
@@ -40,12 +56,12 @@ export interface Test00AjaxUpdateInputModel {
   UPDATE_PROG_CD?: string;
   UPDATE_DATE_TIME?: Date;
 }
-export interface Test00AjaxValueInputModel {
+export interface TestAjaxValueInputModel {
   Name?: string;
   Count?: number;
   Date?: Date;
 }
-export interface Test00AjaxValueOutputModel {
+export interface TestAjaxValueOutputModel {
   Name?: string;
   Count?: number;
   Date?: Date;
