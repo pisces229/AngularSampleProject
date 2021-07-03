@@ -17,7 +17,6 @@ export class BlockToastService {
   constructor(private injector: Injector,
     private overlay: Overlay,
     private ngZone: NgZone) {
-    console.log('BlockToastService');
     const positionStrategy = this.overlay
       .position()
       .global()

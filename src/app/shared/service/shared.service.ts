@@ -8,7 +8,6 @@ export class SharedService {
   private count: number = 1;
 
   constructor() {
-    console.log('SharedService');
   }
 
   get = () => this.count;

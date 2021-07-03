@@ -1,30 +1,41 @@
-section {
+.self-section {
   background: white;
-  border-radius: 0.5rem;
-  padding: 1rem;
+  border-radius: 3px;
+  padding: 10px;
   text-align: center;
 }
-h2 {
-  min-width: 12rem;
+.self-title {
   color: red;
 }
-.message {
+.self-message {
+  max-height: 4rem;
   background: #eee;
-  border-radius: 0.3rem;
-  padding: 0.5rem;
+  border-radius: 3px;
+  padding: 3px;
   text-align: left;
   font-family: monospace;
   word-break: break-all;
-  max-height: 4rem;
   overflow: auto;
 }
-.stack {
+.self-stack {
+  max-height: 8.4rem;
   background: #eee;
-  border-radius: 0.3rem;
-  padding: 0.5rem;
+  border-radius: 3px;
+  padding: 3px;
   text-align: left;
   font-family: monospace;
   word-break: break-all;
-  max-height: 8.4rem;
   overflow: auto;
+}
+.self-button {
+  height: 30px;
+  background: #ffffff;
+  border-radius: 3px;
+  padding: 5 10px;
+  font-family: monospace;
+  border: 1px solid currentColor;
+  cursor: pointer;
+}
+.self-button:hover {
+  background: #eee;
 }

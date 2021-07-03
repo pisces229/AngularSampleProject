@@ -34,11 +34,20 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles.scss",
               {
                 "input": "src/scss/global.scss",
                 "bundleName": "global",
+                "inject": false
+              },
+              {
+                "input": "src/scss/layout01.scss",
+                "bundleName": "layout01",
+                "inject": false
+              },
+              {
+                "input": "src/scss/layout02.scss",
+                "bundleName": "layout02",
                 "inject": false
               }
             ],

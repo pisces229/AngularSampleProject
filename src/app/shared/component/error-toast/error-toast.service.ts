@@ -19,7 +19,6 @@ export class ErrorToastService {
   constructor(private injector: Injector,
     private overlay: Overlay,
     private ngZone: NgZone) {
-    console.log('ErrorToastService');
     const positionStrategy = this.overlay
       .position()
       .global()

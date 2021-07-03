@@ -15,7 +15,7 @@ export class NothingInterceptor implements HttpInterceptor {
   constructor(private injector: Injector) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log('NothingInterceptor');
+    //console.log('NothingInterceptor');
     return next.handle(request)
     .pipe(catchError((error) => {
       const errorToastService = this.injector.get(ErrorToastService);

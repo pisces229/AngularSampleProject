@@ -1,0 +1,19 @@
+<h1>Slot</h1>
+<div class="self-row">
+  <div>Slot Main</div>
+  <div>
+    <button type="button" (click)="onClickSetSlotForm()">Set Slot Form</button>
+    <button type="button" (click)="onClickGetSlotForm()">Get Slot Form</button>
+  </div>
+  <div>Slot Form</div>
+  <div>
+    <app-slot-form #viewChildSlotForm>
+      <ng-template #contentChildButton>
+        <button type="button" (click)="onClickButton()">Main Button</button>
+      </ng-template>
+      <ng-template #contentChildForm>
+        <app-slot-form></app-slot-form>
+      </ng-template>
+    </app-slot-form>
+  </div>
+</div>

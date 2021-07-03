@@ -1,17 +1,4 @@
-// Component
-export interface Test01Model {
-  Count: number;
-}
-export interface Test01FormModel {
-  Name?: string;
-  Age?: number;
-}
-export interface Test02Model {
-  Count: number;
-}
-export interface Test02FormModel {
-  Name?: string;
-  Age?: number;
+export interface TestModel {
 }
 // Ajax
 export interface TestAjaxInsertInputModel {

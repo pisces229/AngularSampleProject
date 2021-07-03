@@ -1,10 +1,10 @@
-<section>
-  <h2>ERROR</h2>
-	<p class="message">
+<section class="self-section">
+  <h2 class="self-title">an error has occurred</h2>
+	<p class="self-message">
 		{{value?.message}}
 	</p>
-	<p class="stack">
+	<p class="self-stack">
 		{{value?.stack}}
 	</p>
-  <button class="" (click)="onClickClose()">close</button>
+  <button class="self-button" (click)="onClickCopy()">copy</button>
 </section>

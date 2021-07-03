@@ -22,7 +22,7 @@ export class AuthTokenService {
     if (this.authTokenStoreService.getAuthToken()) {
       let httpClient = new HttpClient(this.httpBackend);
       return httpClient
-      .post(this.endpointService.defaultUrl('Test/Refresh'), JSON.stringify(this.authTokenStoreService.getAuthToken()),
+      .post(this.endpointService.defaultUrl('Login/Refresh'), JSON.stringify(this.authTokenStoreService.getAuthToken()),
       {
         headers: new HttpHeaders({
           'Content-Type': 'text/json'

@@ -18,7 +18,7 @@ export class DefaultGuard implements CanActivate, CanActivateChild, CanDeactivat
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log('DefaultGuard canActivate');
+      //console.log('DefaultGuard canActivate');
       // console.log(route);
       // console.log(state);
       // console.log(route.routeConfig?.path);
@@ -28,7 +28,7 @@ export class DefaultGuard implements CanActivate, CanActivateChild, CanDeactivat
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log('DefaultGuard canActivateChild');
+      //console.log('DefaultGuard canActivateChild');
       // console.log(childRoute);
       // console.log(state);
       // console.log(childRoute.routeConfig?.path);
@@ -57,13 +57,13 @@ export class DefaultGuard implements CanActivate, CanActivateChild, CanDeactivat
     currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log('DefaultGuard canDeactivate');
+      //console.log('DefaultGuard canDeactivate');
       return of(true);
   }
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log('DefaultGuard canLoad');
+      //console.log('DefaultGuard canLoad');
       return of(true);
   }
 }

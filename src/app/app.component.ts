@@ -15,10 +15,6 @@ import { EndpointService } from './shared/service/endpoint.service';
 })
 export class AppComponent {
 
-  title = 'AngularSampleProject';
-
-  items = ["test00", "test01", "test02"];
-
   constructor(private injector: Injector,
     private router: Router,
     private httpClient: HttpClient,
@@ -35,10 +31,4 @@ export class AppComponent {
     //   httpClient.get(endpointUtilService.defaultUrl('assets/test.json')).subscribe(value => console.log(value));
     // }
   }
-
-  goPage(page: string): void {
-    // do clear all page store
-    this.router.navigate([`test/${page}`]);
-  }
-
 }

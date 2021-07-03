@@ -18,7 +18,7 @@ export class DefaultInterceptor implements HttpInterceptor {
     private authTokenStoreService: AuthTokenStoreService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('DefaultInterceptor');
+    //console.log('DefaultInterceptor');
     if (this.authTokenStoreService.getAuthToken()) {
       request = this.addToken(request, this.authTokenStoreService.getAuthToken());
     }

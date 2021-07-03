@@ -4,29 +4,31 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AppRoutingPath } from './app-routing-path';
 
 import { DefaultGuard } from './core/guard/default.guard';
-import { HomeComponent } from './page/home/home.component';
-import { LoginComponent } from './page/login/login.component';
 
 const routes: Routes = [
   {
-    path: AppRoutingPath.Login,
-    component: LoginComponent
-  },
-  {
-    path: AppRoutingPath.Home,
-    component: HomeComponent
-  },
-  {
     path: AppRoutingPath.Test,
+    loadChildren: () => import('./page/test/test.module').then(m => m.TestModule)
+  },
+  {
+    path: AppRoutingPath.Store,
     canActivate: [DefaultGuard],
     canActivateChild: [DefaultGuard],
     canDeactivate: [DefaultGuard],
     canLoad: [DefaultGuard],
-    loadChildren: () => import('./page/test/test.module').then(m => m.TestModule)
+    loadChildren: () => import('./page/store/store.module').then(m => m.StoreModule)
+  },
+  {
+    path: AppRoutingPath.Layout,
+    loadChildren: () => import('./page/layout/layout.module').then(m => m.LayoutModule)
+  },
+  {
+    path: AppRoutingPath.Slot,
+    loadChildren: () => import('./page/slot/slot.module').then(m => m.SlotModule)
   },
   {
     path: '**',
-    redirectTo: AppRoutingPath.Login,
+    redirectTo: AppRoutingPath.Test,
     pathMatch: 'full'
   }
 ];

@@ -2,7 +2,7 @@
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, finalize, mapTo, tap } from 'rxjs/operators';
+import { catchError, finalize, map, mapTo, tap } from 'rxjs/operators';
 
 // shared
 import {
@@ -62,12 +62,15 @@ export class TestService {
   signIn(): Observable<boolean> {
     let postData = { Username: "Username", Password: "Password" };
     return this.httpClient
-      .post(this.endpointService.defaultUrl('Login/SignIn'), postData, { responseType: 'text'})
+      .post<CommonAjaxOutputModel<string>>(this.endpointService.defaultUrl('Login/SignIn'), postData)
       .pipe(
-        tap(value => {
-          this.authTokenStoreService.setAuthToken(value);
+        map(value => {
+          console.log(value);
+          if (value.Success) {
+            this.authTokenStoreService.setAuthToken(value.Data);
+          }
+          return value.Success;
         }),
-        mapTo(true),
         catchError(error => {
           return of(false);
         }));

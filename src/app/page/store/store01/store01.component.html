@@ -1,0 +1,11 @@
+<input type="text" [(ngModel)]="form.name">
+&nbsp;
+<input type="text" [(ngModel)]="form.remark">
+<br>
+<select>
+  <option *ngFor="let item of options; let index = index">{{item.text}}</option>
+</select>
+<br>
+<button *ngIf="!buttonMode.Hidden" [disabled]="!buttonMode.Enable">ButtonMode</button>
+&nbsp;
+<button (click)="onClickPage()">Page</button>

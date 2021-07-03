@@ -1,0 +1,26 @@
+
+<table>
+  <tr>
+    <td colspan="2">
+      <ng-content *ngTemplateOutlet="contentChildButton"></ng-content>
+    </td>
+  </tr>
+  <tr>
+    <td>Name:</td>
+    <td><input type="text" [(ngModel)]="form.name"></td>
+  </tr>
+  <tr>
+    <td>Remark:</td>
+    <td><input type="text" [(ngModel)]="form.remark"></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <ng-content *ngTemplateOutlet="contentChildButton"></ng-content>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <ng-content *ngTemplateOutlet="contentChildForm"></ng-content>
+    </td>
+  </tr>
+<table>

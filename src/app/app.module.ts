@@ -16,15 +16,10 @@ import { SharedAngularCdkModule } from './shared/shared-angular-cdk.module';
 import { SharedAngularMaterialModule } from './shared/shared-angular-material.module';
 import { SharedComponentModule } from './shared/shared-component.module';
 import { SharedPipeModule } from './shared/shared-pipe.module';
-// page
-import { LoginComponent } from './page/login/login.component';
-import { HomeComponent } from './page/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     AppRoutingModule,
