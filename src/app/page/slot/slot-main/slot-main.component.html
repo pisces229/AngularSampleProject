@@ -1,9 +1,12 @@
 <h1>Slot</h1>
-<div class="self-row">
+<div>
   <div>Slot Main</div>
   <div>
     <button type="button" (click)="onClickSetSlotForm()">Set Slot Form</button>
     <button type="button" (click)="onClickGetSlotForm()">Get Slot Form</button>
+    <button type="button" (click)="onClickOpenComponentPortal()">Open Component Portal</button>
+    <button type="button" (click)="onClickOpenTemplatePortal()">Open Template Portal</button>
+
   </div>
   <div>Slot Form</div>
   <div>
@@ -17,3 +20,10 @@
     </app-slot-form>
   </div>
 </div>
+
+<ng-template #templateRef>
+  <section class="self-section">
+    <h3>This is TemplatePortal</h3>
+    <button type="button" (click)="onClickCloseTemplatePortal()">Close</button>
+  </section>
+</ng-template>

@@ -69,9 +69,7 @@ export class ErrorToastService {
 
   push(message: string, stack: string) {
     try {
-      const path = location instanceof PathLocationStrategy ? location.path() : '';
       if (!this.opened) {
-        this.opened = true;
         this.opened = true;
         this.overlayRef = this.overlay.create(this.overlayConfig);
         this.componentPortal = new ComponentPortal(

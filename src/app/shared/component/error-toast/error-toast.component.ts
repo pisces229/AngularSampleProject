@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { ERROR_TOAST_TOKEN } from './error-toast-token';
 import { Clipboard } from "@angular/cdk/clipboard";
+import { PathLocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-error-toast',
@@ -15,13 +16,13 @@ export class ErrorToastComponent {
   observable$: Observable<void> = this.subject.asObservable();
 
   constructor(@Inject(ERROR_TOAST_TOKEN) public value: { message: string; stack: string },
-    private router: Router,
     private clipboard: Clipboard) {
+      ;
   }
 
   onClickCopy(): void {
     this.clipboard.copy( `
-    router: ${this.router.url}
+    location: ${location instanceof PathLocationStrategy ? location.path() : ''}
     message: ${this.value.message}
     stack: ${this.value.stack}
     `);
