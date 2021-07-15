@@ -15,6 +15,8 @@ import { EndpointService } from './shared/service/endpoint.service';
 })
 export class AppComponent {
 
+  marqueeText = '跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦跑馬燈呦';
+
   constructor(private injector: Injector,
     private router: Router,
     private httpClient: HttpClient,

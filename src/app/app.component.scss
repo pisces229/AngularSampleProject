@@ -1,0 +1,24 @@
+.marquee {
+  font-size: 1.125rem;
+  height: 40px;
+  overflow: hidden;
+  position: relative;
+}
+.marquee .text {
+  min-width: 100%;
+  white-space: nowrap;
+  animation-name: marquee;
+  animation-duration: 15s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  position: absolute;
+}
+@keyframes marquee {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
