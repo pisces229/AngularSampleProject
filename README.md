@@ -40,5 +40,6 @@
         [parent]-routing.module.ts
         [parent].module.ts
 
-### json2ts
-http://json2ts.com/
+### json2ts [http://json2ts.com/]
+`JSON.stringify(value)`
+
