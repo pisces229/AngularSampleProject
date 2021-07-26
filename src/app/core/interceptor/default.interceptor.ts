@@ -68,6 +68,11 @@ export class DefaultInterceptor implements HttpInterceptor {
     .pipe(
       switchMap((token: string) => {
         return next.handle(this.addToken(request, token));
+      }),
+      catchError(error => {
+        const errorToastService = this.injector.get(ErrorToastService);
+        errorToastService.pushHttpErrorResponse(error);
+        return throwError(error);
       }));
   }
 
