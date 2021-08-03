@@ -9,6 +9,6 @@ export class EndpointService {
 
   constructor() { }
 
-  defaultUrl = (url : string) => `${environment.defaultEndpoint}/${url}`;
+  defaultUrl = (url : string) => `${environment.defaultEndpoint}/api/${url}`;
 
 }
