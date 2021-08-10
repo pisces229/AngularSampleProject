@@ -1,5 +1,6 @@
 import { Component, ContentChild, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { SlotFormModel } from '../slot-model';
+import { SlotService } from '../slotservice';
 
 @Component({
   selector: 'app-slot-form',
@@ -24,7 +25,7 @@ export class SlotFormComponent implements OnInit {
   @ContentChild('contentChildButton') contentChildButton!: TemplateRef<any>;
   @ContentChild('contentChildForm') contentChildForm!: TemplateRef<SlotFormComponent>;
 
-  constructor() { }
+  constructor(private slotService: SlotService) { }
 
   ngOnInit(): void {
 

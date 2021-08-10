@@ -1,13 +1,18 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { Component, ComponentRef, ContentChild, ElementRef, EmbeddedViewRef, Injector, NgZone, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Subscription, timer } from 'rxjs';
 import { SlotFormComponent } from '../slot-form/slot-form.component';
 import { SlotOverlayComponent } from '../slot-overlay/slot-overlay.component';
+import { SlotService } from '../slotservice';
 
 @Component({
   selector: 'app-slot-main',
   templateUrl: './slot-main.component.html',
-  styleUrls: ['./slot-main.component.scss']
+  styleUrls: ['./slot-main.component.scss'],
+  providers: [
+    SlotService
+  ]
 })
 export class SlotMainComponent implements OnInit, OnDestroy {
 
@@ -33,7 +38,10 @@ export class SlotMainComponent implements OnInit, OnDestroy {
   private templatePortal!: TemplatePortal<any>;
   @ViewChild('templateRef') templateRef!: TemplateRef<any>;
 
-  constructor(private injector: Injector,
+  private timerSubscription!: Subscription;
+
+  constructor(private slotService: SlotService,
+    private injector: Injector,
     private overlay: Overlay,
     private ngZone: NgZone,
     private viewContainerRef: ViewContainerRef) {
@@ -53,10 +61,14 @@ export class SlotMainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
+    this.slotService.add()
+    this.timerSubscription = timer(1000, 1000).subscribe(value => {
+      console.log('SlotMainComponent:', this.slotService.get())
+    });
   }
 
   ngOnDestroy(): void {
+    this.timerSubscription.unsubscribe();
     if (this.componentRef) {
       console.log('SlotMainComponent', 'ngOnDestroy', 'overlayRef');
       this.overlayRef.detach();
@@ -78,10 +90,22 @@ export class SlotMainComponent implements OnInit, OnDestroy {
 
   onClickOpenComponentPortal() {
     this.overlayRef = this.overlay.create(this.overlayConfig);
+    // this.componentPortal = new ComponentPortal(
+    //   SlotOverlayComponent,
+    //   null,
+    //   this.injector);
     this.componentPortal = new ComponentPortal(
-      SlotOverlayComponent,
-      null,
-      this.injector);
+        SlotOverlayComponent,
+        null,
+        Injector.create({
+          parent: this.injector,
+          providers: [
+            {
+              provide: SlotService,
+              useValue: this.slotService
+            }
+          ]
+        }));
     this.componentRef = this.overlayRef.attach(this.componentPortal);
     this.ngZone.run(() => {
       this.componentRef.instance.observable$.subscribe(() => {

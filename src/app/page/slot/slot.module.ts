@@ -7,6 +7,7 @@ import { SlotMainComponent } from './slot-main/slot-main.component';
 import { SlotFormComponent } from './slot-form/slot-form.component';
 import { SlotOverlayComponent } from './slot-overlay/slot-overlay.component';
 import { FormsModule } from '@angular/forms';
+import { SlotService } from './slotservice';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,9 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     SlotRoutingModule,
     SharedAngularCdkModule,
-  ]
+  ],
+  // providers: [
+  //   SlotService
+  // ]
 })
 export class SlotModule { }
