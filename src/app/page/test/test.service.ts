@@ -33,36 +33,36 @@ export class TestService {
     let postData = {
       value: value
     };
-    return this.httpClient.get<string>(this.endpointService.defaultUrl('Test/GetValueByValue'), { params: postData });
+    return this.httpClient.get<string>(this.endpointService.defaultUrl('Test/GetValueByValue'),
+    { params: postData });
   }
 
-  postValueByValue(value: string): Observable<string> {
-    let postData = JSON.stringify(value);
-    return this.httpClient.post(this.endpointService.defaultUrl('Test/PostValueByValue'), postData,
+  postValueByValue = (value: string) =>
+    this.httpClient.post(this.endpointService.defaultUrl('Test/PostValueByValue'),
+    JSON.stringify(value),
       {
         headers: new HttpHeaders({
           'Content-Type': 'text/json'
         }),
         responseType: 'text'
       });
-  }
 
   getValueByModel(postData: TestAjaxValueInputModel): Observable<TestAjaxValueOutputModel> {
     let httpParams = new HttpParams();
     for (let [key, value] of Object.entries(postData)) {
       httpParams = httpParams.set(key, value);
     }
-    return this.httpClient.get<TestAjaxValueOutputModel>(this.endpointService.defaultUrl('Test/getValueByModel'), { params: httpParams });
+    return this.httpClient.get<TestAjaxValueOutputModel>(
+      this.endpointService.defaultUrl('Test/getValueByModel'), { params: httpParams });
   }
 
-  postValueByModel(postData: TestAjaxValueInputModel): Observable<TestAjaxValueOutputModel> {
-    return this.httpClient.post<TestAjaxValueOutputModel>(this.endpointService.defaultUrl('Test/PostValueByModel'), postData);
-  }
+  postValueByModel = (postData: TestAjaxValueInputModel) =>
+    this.httpClient.post<TestAjaxValueOutputModel>(
+      this.endpointService.defaultUrl('Test/PostValueByModel'), postData);
 
-  signIn(): Observable<boolean> {
-    let postData = { Username: "Username", Password: "Password" };
-    return this.httpClient
-      .post<CommonAjaxOutputModel<string>>(this.endpointService.defaultUrl('Login/SignIn'), postData)
+  signIn = () =>
+    this.httpClient.post<CommonAjaxOutputModel<string>>(this.endpointService.defaultUrl('Login/SignIn'),
+      { Username: "Username", Password: "Password" })
       .pipe(
         map(value => {
           console.log(value);
@@ -74,12 +74,10 @@ export class TestService {
         catchError(error => {
           return of(false);
         }));
-  }
 
-  Refresh(): Observable<boolean> {
-    let postData = JSON.stringify(this.authTokenStoreService.getAuthToken());
-    return this.httpClient
-      .post(this.endpointService.defaultUrl('Login/Refresh'), postData,
+  Refresh = () =>
+    this.httpClient.post(this.endpointService.defaultUrl('Login/Refresh'),
+      JSON.stringify(this.authTokenStoreService.getAuthToken()),
         {
           headers: new HttpHeaders({
             'Content-Type': 'text/json'
@@ -93,12 +91,10 @@ export class TestService {
           this.authTokenStoreService.clear();
           return of(false);
         }));
-  }
 
-  signOut(): Observable<boolean> {
-    let postData = JSON.stringify(this.authTokenStoreService.getAuthToken());
-    return this.httpClient
-      .post(this.endpointService.defaultUrl('Login/signOut'), postData,
+  signOut = () =>
+    this.httpClient.post(this.endpointService.defaultUrl('Login/signOut'),
+      JSON.stringify(this.authTokenStoreService.getAuthToken()),
         {
           headers: new HttpHeaders({
             'Content-Type': 'text/json'
@@ -108,59 +104,52 @@ export class TestService {
       .pipe(
         finalize(() => this.authTokenStoreService.clear()),
         mapTo(true));
-  }
 
-  queryWhere(postData: TestAjaxQueryInputModel): Observable<CommonAjaxOutputModel<TestAjaxQueryOutputModel[]>> {
-    return this.httpClient
-      .get<CommonAjaxOutputModel<TestAjaxQueryOutputModel[]>>(this.endpointService.defaultUrl('Test/QueryWhere'));
-  }
+  queryWhere = (postData: TestAjaxQueryInputModel) =>
+    this.httpClient.get<CommonAjaxOutputModel<TestAjaxQueryOutputModel[]>>(
+      this.endpointService.defaultUrl('Test/QueryWhere'));
 
-  insert(postData: TestAjaxInsertInputModel): Observable<CommonAjaxOutputModel<string>> {
-    return this.httpClient
-      .post<CommonAjaxOutputModel<string>>(this.endpointService.defaultUrl('Test/Insert'), postData);
-  }
-  update(postData: TestAjaxUpdateInputModel): Observable<CommonAjaxOutputModel<string>> {
-    return this.httpClient
-      .post<CommonAjaxOutputModel<string>>(this.endpointService.defaultUrl('Test/Update'), postData);
-  }
+  insert = (postData: TestAjaxInsertInputModel) =>
+    this.httpClient.post<CommonAjaxOutputModel<string>>(
+      this.endpointService.defaultUrl('Test/Insert'), postData);
 
-  delete(postData: string): Observable<CommonAjaxOutputModel<string>> {
-    return this.httpClient
-      .post<CommonAjaxOutputModel<string>>(this.endpointService.defaultUrl('Test/Delete'), postData,
+  update = (postData: TestAjaxUpdateInputModel) =>
+    this.httpClient.post<CommonAjaxOutputModel<string>>(
+      this.endpointService.defaultUrl('Test/Update'), postData);
+
+  delete = (postData: string) =>
+    this.httpClient.post<CommonAjaxOutputModel<string>>(
+      this.endpointService.defaultUrl('Test/Delete'), postData,
       {
         headers: new HttpHeaders({
           'Content-Type': 'text/json'
         })
       });
-  }
 
-  queryGrid(postData: CommonAjaxPageModel<TestAjaxQueryInputModel>): Observable<CommonAjaxOutputModel<CommonAjaxPageModel<TestAjaxQueryOutputModel>>> {
-    return this.httpClient
-      .post<CommonAjaxOutputModel<CommonAjaxPageModel<TestAjaxQueryOutputModel>>>(this.endpointService.defaultUrl('Test/QueryGrid'), postData);
-  }
+  queryGrid = (postData: CommonAjaxPageModel<TestAjaxQueryInputModel>) =>
+    this.httpClient.post<CommonAjaxOutputModel<CommonAjaxPageModel<TestAjaxQueryOutputModel>>>(
+      this.endpointService.defaultUrl('Test/QueryGrid'), postData);
 
-  upload(postData: FormData): Observable<CommonAjaxOutputModel<string>> {
-    return this.httpClient
-      .post<CommonAjaxOutputModel<string>>(this.endpointService.defaultUrl('Test/Upload'), postData);
-  }
+  upload = (postData: FormData) =>
+    this.httpClient.post<CommonAjaxOutputModel<string>>(
+      this.endpointService.defaultUrl('Test/Upload'), postData);
 
-  uploads(postData: FormData): Observable<CommonAjaxOutputModel<string>> {
-    return this.httpClient
-      .post<CommonAjaxOutputModel<string>>(this.endpointService.defaultUrl('Test/Uploads'), postData);
-  }
+  uploads = (postData: FormData) =>
+    this.httpClient.post<CommonAjaxOutputModel<string>>(
+      this.endpointService.defaultUrl('Test/Uploads'), postData);
 
-  getDownload(postData: any): Observable<HttpResponse<Blob>> {
-    return this.httpClient.get(this.endpointService.defaultUrl('Test/GetDownload'), {
+  getDownload = (postData: any) =>
+    this.httpClient.get(this.endpointService.defaultUrl('Test/GetDownload'), {
       observe: 'response',
       responseType: 'blob'
     });
-  }
 
-  postDownload(postData: any): Observable<HttpResponse<Blob>> {
-    return this.httpClient.post(this.endpointService.defaultUrl('Test/PostDownload'), postData, {
+  postDownload = (postData: any) =>
+    this.httpClient.post(this.endpointService.defaultUrl('Test/PostDownload'),
+    postData,
+    {
       observe: 'response',
       responseType: 'blob'
     });
-  }
 
 }

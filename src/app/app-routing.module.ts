@@ -4,8 +4,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AppRoutingPath } from './app-routing-path';
 
 import { DefaultGuard } from './core/guard/default.guard';
+import { ErrorComponent } from './page/error/error.component';
 
 const routes: Routes = [
+  {
+    path: AppRoutingPath.Error,
+    component: ErrorComponent,
+  },
   {
     path: AppRoutingPath.Test,
     loadChildren: () => import('./page/test/test.module').then(m => m.TestModule)
@@ -27,8 +32,13 @@ const routes: Routes = [
     loadChildren: () => import('./page/slot/slot.module').then(m => m.SlotModule)
   },
   {
-    path: '**',
+    path: '',
     redirectTo: AppRoutingPath.Test,
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: AppRoutingPath.Error,
     pathMatch: 'full'
   }
 ];

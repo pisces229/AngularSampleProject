@@ -16,10 +16,12 @@ import { SharedAngularCdkModule } from './shared/shared-angular-cdk.module';
 import { SharedAngularMaterialModule } from './shared/shared-angular-material.module';
 import { SharedComponentModule } from './shared/shared-component.module';
 import { SharedPipeModule } from './shared/shared-pipe.module';
+import { ErrorComponent } from './page/error/error.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ErrorComponent,
   ],
   imports: [
     AppRoutingModule,
