@@ -10,6 +10,7 @@ export class DownloadService {
   constructor() { }
 
   message(response: HttpResponse<Blob>): Promise<any> {
+    console.log(`response.body?.type:${response.body?.type}`);
     if (response.body?.type == 'text/plain') {
       return response.body?.text().then(value => value);
     } else {

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  defaultEndpoint: 'http://localhost:16514',
+  defaultEndpoint: 'https://localhost:44392',
   //defaultEndpoint: 'http://localhost:4200',
 };
 

@@ -24,6 +24,8 @@ import {
 @Injectable()
 export class TestService {
 
+  private controller = 'Test';
+
   constructor(private httpClient: HttpClient,
     private authTokenStoreService: AuthTokenStoreService,
     private endpointService: EndpointService) {
@@ -33,12 +35,12 @@ export class TestService {
     let postData = {
       value: value
     };
-    return this.httpClient.get<string>(this.endpointService.defaultUrl('Test/GetValueByValue'),
+    return this.httpClient.get<string>(this.endpointService.defaultUrl(`${this.controller}/GetValueByValue`),
     { params: postData });
   }
 
   postValueByValue = (value: string) =>
-    this.httpClient.post(this.endpointService.defaultUrl('Test/PostValueByValue'),
+    this.httpClient.post(this.endpointService.defaultUrl(`${this.controller}/PostValueByValue`),
     JSON.stringify(value),
       {
         headers: new HttpHeaders({
@@ -53,15 +55,15 @@ export class TestService {
       httpParams = httpParams.set(key, value);
     }
     return this.httpClient.get<TestAjaxValueOutputModel>(
-      this.endpointService.defaultUrl('Test/getValueByModel'), { params: httpParams });
+      this.endpointService.defaultUrl(`${this.controller}/getValueByModel`), { params: httpParams });
   }
 
   postValueByModel = (postData: TestAjaxValueInputModel) =>
     this.httpClient.post<TestAjaxValueOutputModel>(
-      this.endpointService.defaultUrl('Test/PostValueByModel'), postData);
+      this.endpointService.defaultUrl(`${this.controller}/PostValueByModel`), postData);
 
   signIn = () =>
-    this.httpClient.post<CommonAjaxOutputModel<string>>(this.endpointService.defaultUrl('Login/SignIn'),
+    this.httpClient.post<CommonAjaxOutputModel<string>>(this.endpointService.defaultUrl(`Login/SignIn`),
       { Username: "Username", Password: "Password" })
       .pipe(
         map(value => {
@@ -76,7 +78,7 @@ export class TestService {
         }));
 
   Refresh = () =>
-    this.httpClient.post(this.endpointService.defaultUrl('Login/Refresh'),
+    this.httpClient.post(this.endpointService.defaultUrl(`Login/Refresh`),
       JSON.stringify(this.authTokenStoreService.getAuthToken()),
         {
           headers: new HttpHeaders({
@@ -93,7 +95,7 @@ export class TestService {
         }));
 
   signOut = () =>
-    this.httpClient.post(this.endpointService.defaultUrl('Login/signOut'),
+    this.httpClient.post(this.endpointService.defaultUrl(`Login/signOut`),
       JSON.stringify(this.authTokenStoreService.getAuthToken()),
         {
           headers: new HttpHeaders({
@@ -107,19 +109,19 @@ export class TestService {
 
   queryWhere = (postData: TestAjaxQueryInputModel) =>
     this.httpClient.get<CommonAjaxOutputModel<TestAjaxQueryOutputModel[]>>(
-      this.endpointService.defaultUrl('Test/QueryWhere'));
+      this.endpointService.defaultUrl(`${this.controller}/QueryWhere`));
 
   insert = (postData: TestAjaxInsertInputModel) =>
     this.httpClient.post<CommonAjaxOutputModel<string>>(
-      this.endpointService.defaultUrl('Test/Insert'), postData);
+      this.endpointService.defaultUrl(`${this.controller}/Insert`), postData);
 
   update = (postData: TestAjaxUpdateInputModel) =>
     this.httpClient.post<CommonAjaxOutputModel<string>>(
-      this.endpointService.defaultUrl('Test/Update'), postData);
+      this.endpointService.defaultUrl(`${this.controller}/Update`), postData);
 
   delete = (postData: string) =>
     this.httpClient.post<CommonAjaxOutputModel<string>>(
-      this.endpointService.defaultUrl('Test/Delete'), postData,
+      this.endpointService.defaultUrl(`${this.controller}/Delete`), postData,
       {
         headers: new HttpHeaders({
           'Content-Type': 'text/json'
@@ -128,24 +130,24 @@ export class TestService {
 
   queryGrid = (postData: CommonAjaxPageModel<TestAjaxQueryInputModel>) =>
     this.httpClient.post<CommonAjaxOutputModel<CommonAjaxPageModel<TestAjaxQueryOutputModel>>>(
-      this.endpointService.defaultUrl('Test/QueryGrid'), postData);
+      this.endpointService.defaultUrl(`${this.controller}/QueryGrid`), postData);
 
   upload = (postData: FormData) =>
     this.httpClient.post<CommonAjaxOutputModel<string>>(
-      this.endpointService.defaultUrl('Test/Upload'), postData);
+      this.endpointService.defaultUrl(`${this.controller}/Upload`), postData);
 
   uploads = (postData: FormData) =>
     this.httpClient.post<CommonAjaxOutputModel<string>>(
-      this.endpointService.defaultUrl('Test/Uploads'), postData);
+      this.endpointService.defaultUrl(`${this.controller}/Uploads`), postData);
 
   getDownload = (postData: any) =>
-    this.httpClient.get(this.endpointService.defaultUrl('Test/GetDownload'), {
+    this.httpClient.get(this.endpointService.defaultUrl(`${this.controller}/Download`), {
       observe: 'response',
       responseType: 'blob'
     });
 
   postDownload = (postData: any) =>
-    this.httpClient.post(this.endpointService.defaultUrl('Test/PostDownload'),
+    this.httpClient.post(this.endpointService.defaultUrl(`${this.controller}/Download`),
     postData,
     {
       observe: 'response',
