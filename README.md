@@ -43,3 +43,5 @@
 ### json2ts [http://json2ts.com/]
 `JSON.stringify(value)`
 
+## Augury
+
